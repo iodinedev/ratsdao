@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+  .section(style="padding:15vw")
+    div(style="width:100%")
+      h1
+        | Error 
+        = status
+
+      p
+        | Uh-oh! You ran into an error. Need to go back 
+        a(href="/") home
+        | ?
+      if error
+        p.tip
+          | Error: 
+          = error

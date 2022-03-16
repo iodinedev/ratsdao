@@ -1,0 +1,65 @@
+doctype html
+html(lang="en-us")
+  head
+    if title
+      title= title
+    else
+      title Rats DAO
+    // Meta tags
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=Edge")
+    meta(name="format-detection", content="telephone=no")
+    meta(name="msapplication-TileColor", content="#")
+    meta(name="theme-color", content="#")
+    meta(name="description", content="")
+    link(rel="canonical", href="")
+    meta(property="og:locale", content="en_US")
+    meta(property="og:type", content="website")
+    meta(property="og:title", content="")
+    meta(property="og:description", content="")
+    meta(property="og:url", content="")
+    meta(property="og:site_name", content="")
+    link(rel="shortlink", href="")
+    // Links
+    link(rel="stylesheet", href="/stylesheets/style.css", defer)
+    link(rel="apple-touch-icon", href="/img/logo.png")
+    link(rel="icon", type="image/ico", href="/img/logo.ico")
+    link(rel="preconnect" href="https://fonts.googleapis.com")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@0;1&display=swap" rel="stylesheet")
+    link(href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet")
+    noscript
+      link(
+        rel="stylesheet",
+        media="all",
+        href="/stylesheets/noscript.css",
+        defer
+      )
+    // Viewport relativity
+    meta(
+      name="viewport",
+      content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"
+    )
+    script.
+      var viewportmeta = document.querySelector('meta[name="viewport"]');
+      if (viewportmeta) {
+        if (screen.width < 375) {
+          var newScale = screen.width / 375;
+          viewportmeta.content = "width=375, minimum-scale=" + newScale + ", maximum-scale=1.0, user-scalable=no, initial-scale=" + newScale + "";
+        } else {
+          viewportmeta.content = "width=device-width, maximum-scale=1.0, initial-scale=1.0";
+        }
+      }
+  body
+    #primary_content(
+      style="display: flex; flex-direction: column; justify-content: space-between; min-height: 100vh"
+    )
+      .content
+        block content
+
+    // Scripts
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    script(src="/javascripts/fontawesome/fontawesome.min.js")
+    script(src="/javascripts/fontawesome/brands.min.js")
+    script.
+      AOS.init();
