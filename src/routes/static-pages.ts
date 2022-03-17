@@ -1,8 +1,4 @@
 import { router } from "../components/router";
-import { contactService } from "../services/contact.service";
-import { PublicError } from "../components/sentry";
-import { getDbNfts, getDbNft, getNftAddress } from "../components/nft";
-import { verify } from "hcaptcha";
 
 export function init() {
   router.get("/", async (ctx) => {
