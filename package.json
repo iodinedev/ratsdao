@@ -10,7 +10,7 @@
     "prettier": "prettier --write package.json tsconfig.json src/**/*.ts views/*.pug"
   },
   "engines": {
-    "node": "^17.4.0"
+    "node": "^16.14.1"
   },
   "dependencies": {
     "@aws-sdk/client-ses": "^3.41.0",
