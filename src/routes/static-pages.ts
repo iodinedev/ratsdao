@@ -14,21 +14,9 @@ export function init() {
     });
   });
 
-  router.get("/faq", async (ctx) => {
-    ctx.render("faq.pug", {
-      title: "FAQ | RatsDAO",
-    });
-  });
-
   router.get("/gallery", async (ctx) => {
     ctx.render("gallery.pug", {
       title: "Gallery | RatsDAO",
-    });
-  });
-
-  router.get("/press", async (ctx) => {
-    ctx.render("press.pug", {
-      title: "Press | RatsDAO",
     });
   });
 
