@@ -26,7 +26,9 @@ html(lang="en-us")
     link(rel="icon", type="image/ico", href="/img/logo.ico")
     link(rel="preconnect" href="https://fonts.googleapis.com")
     link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
-    link(href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@0;1&display=swap" rel="stylesheet")
+    link(rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.js" as="script")
+    link(rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style")
+    link(href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet")
     link(href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet")
     noscript
       link(
@@ -57,9 +59,10 @@ html(lang="en-us")
       .content
         block content
 
+      include includes/footer.pug
+
     // Scripts
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    script(src="/javascripts/fontawesome/fontawesome.min.js")
-    script(src="/javascripts/fontawesome/brands.min.js")
+    script(src="https://unpkg.com/aos@2.3.1/dist/aos.js")
+    script(src="/javascripts/main.js" defer)
     script.
       AOS.init();
