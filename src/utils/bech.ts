@@ -1,9 +1,8 @@
 import { bech32 } from 'bech32';
+import 'dotenv/config'
 
 // input Shelley address
 const address = process.env.POOL!;
-
-console.log(address)
 
 // decode bech32 shelley address and convert to hex 
 const addressWords = bech32.decode(address, 1000);
