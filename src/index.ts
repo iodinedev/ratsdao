@@ -12,7 +12,7 @@ for (let route of ['static-pages']) {
 const refresh = parseInt(process.env.REFRESH!) * 60 * 1000;
 
 (async () => {    
-  //await updateDatabase();
+  await updateDatabase();
   
   /*setInterval(
     updateDatabase,

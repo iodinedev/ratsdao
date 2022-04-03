@@ -62,8 +62,6 @@ export function init() {
   router.get("/gallery", async (ctx) => {
     const gallery = await database.getAllNfts();
 
-    console.log(gallery)
-
     ctx.render("gallery.pug", {
       title: "Gallery | RatsDAO",
       gallery: gallery
