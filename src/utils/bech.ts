@@ -1,5 +1,4 @@
 import { bech32 } from 'bech32';
-import 'dotenv/config'
 
 // input Shelley address
 const address = process.env.POOL!;
