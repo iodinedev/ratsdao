@@ -1,9 +1,14 @@
 extends layout
 
 block content
-  .header
-    include includes/header.pug
+  include includes/header.pug
+  .spacer
 
   .section
     h1.section__header Gallery
-    h3.section__header Under Construction
+
+    .cards
+      each nft in gallery
+        .card
+          img(src="/img/nft/" + nft.id + ".png")
+          h3= nft.name

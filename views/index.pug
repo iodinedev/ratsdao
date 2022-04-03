@@ -1,204 +1,33 @@
 extends layout
 
 block content
-  .header#header(data-aos="fade-in" data-aos-delay="1000" data-aos-duration="800" data-aos-offset="-2000")
-    include includes/header.pug
+  include includes/header.pug
 
   .hero
+    .hero-cover
     .background__wrapper
       .background
-        .main.timeone
-          div
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-        .main.timetwo
-          div
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-        .main.timethree
-          div
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-        .main.timefour
-          div
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-        .main.timefive
-          div
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-        .main.timesix
-          div
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-        .main.timeone
-          div
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-        .main.timetwo
-          div
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-        .main.timethree
-          div
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-        .main.timefour
-          div
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-        .main.timefive
-          div
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-        .main.timesix
-          div
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
-          .box
+        - var rows = 8
+        - var count = 15
+        - var current = 0
+        while rows >= 0
+          - var n = 0
+          .main
+            div
+            while n < count
+              .box
+                if (gallery)
+                  img(src="/img/nft/" + gallery[current].id + ".s.png")
+              - current++
+              - n++
+            - current -= count
+            while n < count*2
+              .box
+                if (gallery)
+                  img(src="/img/nft/" + gallery[current].id + ".s.png")
+              - current++
+              - n++
+          - rows--
     .hero__content
       h1(data-aos="fade-in" data-aos-duration="800") RatsDAO
       h3(data-aos="fade-in" data-aos-delay="600" data-aos-duration="800") Cardano's First DAO
@@ -226,3 +55,58 @@ block content
     .section__text
       h2 Connect
       p Get connected with our DAO to democratize access to bluechip CNFTs and accrue benefits for your time. Find us on Discord and Twitter!
+  
+  script.
+    $(function() {
+ 
+    var gallery = $('#gallery ul'),
+      items   = gallery.find('li'),
+      len     = items.length,
+      current = 1,  /* the current item we're looking */
+      
+      first   = items.filter(':first-child'),
+      second  = items.filter((index)=>index==1),
+      last    = items.filter(':last-child'),
+      secondlast = items.filter((index)=>index==items.length-2),
+      
+      triggers = $('button');
+   
+
+  
+      /* 1. Cloning first and last items */
+      first.before(secondlast.clone(true)); 
+      first.before(last.clone(true)); 
+      last.after(second.clone(true)); 
+      last.after(first.clone(true)); 
+      
+      /* 2. Set button handlers */
+      triggers.on('click', function() {
+        
+        if (gallery.is(':not(:animated)')) {
+        
+            var cycle = false,
+                delta = (this.id === "prev")? -1 : 1;
+                /* in the example buttons have id "prev" or "next" */  
+        
+            gallery.animate({ left: "+=" + (-100 * delta) }, function() {
+          
+                current += delta;
+          
+                /** 
+                * we're cycling the slider when the the value of "current" 
+                * variable (after increment/decrement) is 0 or when it exceeds
+                * the initial gallery length
+                */          
+                cycle = !!(current === 0 || current > len);
+          
+                if (cycle) {
+                    /* we switched from image 1 to 4-cloned or 
+                      from image 4 to 1-cloned */
+                    current = (current === 0)? len : 1; 
+                    gallery.css({left:  -100 * (current + 1) });
+                }
+            });   
+        }
+        
+      });
+    });

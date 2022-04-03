@@ -11,6 +11,7 @@ html, body {
   max-width: 100%;
   overflow-x: hidden;
   transition: $transition-time;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -135,7 +136,6 @@ h6 {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: $base-font-weight;
-  font-style: italic;
   font-family: "Fredoka One", sans-serif;
 
   &.subheader {
