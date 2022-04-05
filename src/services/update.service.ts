@@ -5,8 +5,8 @@ import { database } from "../utils/database";
 export const updateDatabase = async () => {
   var finalNfts: Nft[] = [];
   var nfts: {
-    unit: string,
-    quantity: string
+    unit: string;
+    quantity: string;
   }[] = [];
   var returned = 100;
   var page = 1;
@@ -46,10 +46,14 @@ export const updateDatabase = async () => {
       const id: string = nft.asset;
       const name: string = nft.onchain_metadata.name;
       const imagePath = nft.onchain_metadata.image.split("/");
-      const image: string = `https://ipfs.io/ipfs/${imagePath[imagePath.length - 1]}`;
+      const image: string = `https://ipfs.io/ipfs/${
+        imagePath[imagePath.length - 1]
+      }`;
       const tags: string[] = nft.onchain_metadata.tags;
-      const quantity: number = isNaN(parseInt(nft.quantity)) ? 0 : parseInt(nft.quantity);
-      
+      const quantity: number = isNaN(parseInt(nft.quantity))
+        ? 0
+        : parseInt(nft.quantity);
+
       if (await download({ url: image, name: id })) {
         downloaded += 1;
 
@@ -57,7 +61,7 @@ export const updateDatabase = async () => {
           id: id,
           name: name,
           tags: tags,
-          quantity: quantity
+          quantity: quantity,
         });
       }
     }
@@ -65,5 +69,7 @@ export const updateDatabase = async () => {
 
   const updated = await database.addNfts(finalNfts);
 
-  console.log(`Database refreshed. Scraped ${total} assets from the blockchain. Updated ${updated} in local database. Successfully downloaded ${downloaded} images.`)
+  console.log(
+    `Database refreshed. Scraped ${total} assets from the blockchain. Updated ${updated} in local database. Successfully downloaded ${downloaded} images.`
+  );
 };

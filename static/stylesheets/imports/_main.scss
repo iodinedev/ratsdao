@@ -22,6 +22,9 @@
 
   &__content {
     z-index: 1000;
+  }
+
+  .hero-cover + &__content {
     color: white;
   }
 }
@@ -67,6 +70,10 @@
   background: $orange;
   padding: 0 15vw;
   height: 7.5vh;
+
+  .mobile {
+    display: none;
+  }
 
   .social__media {
     display: flex;
@@ -154,6 +161,10 @@
         }
       }
     }
+  }
+
+  #toggle {
+    display: none;
   }
 }
 
@@ -343,7 +354,7 @@ $gap: 25px;
   $animation-time: 320s;
 
   .background {
-    transform: translate(50vw, -10vh);
+    transform: translate(50vw, -9vh);
     width: 200vw;
     height: 200vh;
     top: 0;
@@ -499,6 +510,93 @@ $gap: 25px;
 
     img {
       margin-bottom: math.div($base-sizing, 4);
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  width: 100vw;
+  background: $orange;
+  padding: $base-sizing 15vw;
+  gap: math.div($base-sizing, 5);
+
+  &__col {
+    flex: 1;
+  }
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  gap: math.div($base-sizing, 5);
+  height: $base-sizing;
+  line-height: $base-sizing;
+
+  &__circle {
+    width: $base-sizing;
+    height: $base-sizing;
+    background: rgba(255 255 255 / 50%);
+    border-radius: $base-sizing;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: $base-sizing;
+    text-decoration: none;
+    transition: math.div($transition-time, 2);
+
+    &:hover, &.current {
+      color: black!important;
+      background-color: white;
+    }
+  }
+
+  .arrow-left, .arrow-right {
+    font-size: 1.5em;
+    background-color: $blue;
+
+    &:hover {
+      color: white!important;
+      cursor: pointer;
+      transform: translateY(-8px);
+      box-shadow: 0 7px 0 0 darken($blue, 15%);
+    }
+
+    &:active {
+      transition: math.div($transition-time, 4);
+      background: darken($blue, 20%);
+      transform: translateY(0);
+      box-shadow: none;
+    }
+  }
+
+  .arrow-left {
+    span {
+      transform: scaleX(-1);
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .header {
+    .desktop {
+      display: none;
+    }
+
+    .mobile {
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: $orange;
+
+      img {
+        width: $base-sizing*3;
+        height: $base-sizing*3;
+      }
     }
   }
 }

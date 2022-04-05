@@ -8,21 +8,39 @@ export const database = {
   },
   async addNfts(nfts: Nft[]) {
     try {
-      const updated = await prisma.nfts.createMany({ data: nfts, skipDuplicates: true });
+      const updated = await prisma.nfts.createMany({
+        data: nfts,
+        skipDuplicates: true,
+      });
       return updated.count;
     } catch (err) {
       console.error(err);
     }
   },
 
-  async getAllNfts(limit = 0): Promise<Nft[] | undefined> {
+  async count(): Promise<number> {
+    return await prisma.nfts.count();
+  },
+
+  async pickRandom(count: number): Promise<Nft[]> {
+    const itemCount = await prisma.nfts.count();
+    const skip = Math.max(0, Math.floor(Math.random() * itemCount) - count);
+    const orderBy = ["id", "name", "quantity"][Math.floor(Math.random() * 3)];
+    const orderDir = ["asc", "desc"][Math.floor(Math.random() * 2)];
+
+    return prisma.nfts.findMany({
+      take: count,
+      skip: skip,
+      orderBy: { [orderBy]: orderDir },
+    });
+  },
+
+  async getAllNfts(skip = 0, limit = 0): Promise<Nft[] | undefined> {
     try {
       var response;
 
-      if (limit === 0)
-        response = await prisma.nfts.findMany();
-      else
-        response = await prisma.nfts.findMany({take: limit});
+      if (limit === 0) response = await prisma.nfts.findMany({ skip: skip });
+      else response = await prisma.nfts.findMany({ skip: skip, take: limit });
 
       return response;
     } catch (err) {
@@ -54,5 +72,5 @@ export const database = {
     }
 
     return null;
-  }
-}
+  },
+};

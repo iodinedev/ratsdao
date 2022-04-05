@@ -45,7 +45,7 @@ export async function download({
     });
 
     return true;
-  } catch(err) {
+  } catch (err) {
     console.error(err);
 
     return false;
@@ -75,7 +75,7 @@ export async function deleteFile(name: number | string): Promise<boolean> {
     });
 
     return true;
-  } catch(err) {
+  } catch (err) {
     return false;
   }
 }

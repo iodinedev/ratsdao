@@ -23,13 +23,24 @@ html(lang="en-us")
     // Links
     link(rel="stylesheet", href="/stylesheets/style.css", defer)
     link(rel="apple-touch-icon", href="/img/logo.png")
-    link(rel="icon", type="image/ico", href="/img/logo.ico")
-    link(rel="preconnect" href="https://fonts.googleapis.com")
-    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
-    link(rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.js" as="script")
-    link(rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style")
-    link(href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet")
-    link(href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet")
+    link(rel="icon", type="image/ico", href="/img/ratsdaofavicon.ico")
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+    link(
+      rel="preload",
+      href="https://unpkg.com/aos@2.3.1/dist/aos.js",
+      as="script"
+    )
+    link(
+      rel="preload",
+      href="https://unpkg.com/aos@2.3.1/dist/aos.css",
+      as="style"
+    )
+    link(
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap",
+      rel="stylesheet"
+    )
+    link(href="https://unpkg.com/aos@2.3.1/dist/aos.css", rel="stylesheet")
     noscript
       link(
         rel="stylesheet",
@@ -63,6 +74,6 @@ html(lang="en-us")
 
     // Scripts
     script(src="https://unpkg.com/aos@2.3.1/dist/aos.js")
-    script(src="/javascripts/main.js" defer)
+    script(src="/javascripts/main.js", defer)
     script.
       AOS.init();

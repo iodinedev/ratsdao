@@ -12,3 +12,18 @@ block content
         .card
           img(src="/img/nft/" + nft.id + ".png")
           h3= nft.name
+
+    .pagination
+      if (current != pagination[0])
+        a.arrow-left.pagination__circle(href="/gallery/" + (current - 1))
+          span &#10140;
+      each item in pagination
+        if (item == "skip")
+          | &middot;&middot;&middot;
+        else if (item == current)
+          a.pagination__circle.current(href="/gallery/" + item) #{ item + 1 }
+        else
+          a.pagination__circle(href="/gallery/" + item) #{ item + 1 }
+      if (current != pagination[pagination.length - 1])
+        a.arrow-right.pagination__circle(href="/gallery/" + (current + 1))
+          span &#10140;
