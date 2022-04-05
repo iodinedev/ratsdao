@@ -29,6 +29,18 @@
   }
 }
 
+a.back {
+  display: block;
+  text-decoration: none;
+  background: rgba(255 255 255 / 16%);
+  border-radius: 50px;
+  width: 120px;
+  padding: 0.2em;
+  display: flex;
+  justify-content: center;
+  color: white
+}
+
 .section {
   color: white;
   background: #121212;
@@ -41,6 +53,34 @@
     max-width: $base-sizing*20;
     width: 100%;
   }*/
+
+  &__info {
+    max-width: 1000px;
+    width: 100%;
+    min-width: min(100vw, 500px);
+    display: flex;
+    flex-direction: row;
+    gap: $base-sizing;
+
+    .tags {
+      display: flex;
+      gap: math.div($base-sizing, 4);
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: rgba(255 255 255 / 16%);
+      padding: math.div($base-sizing, 10) math.div($base-sizing, 5);
+      border-radius: $border-radius;
+    }
+
+    img {
+      width: 100%;
+      max-width: $base-sizing*10;
+      height: auto;
+      border-radius: $border-radius;
+    }
+  }
 
   &__text {
     background: rgba(255 255 255 / 16%);
@@ -71,7 +111,15 @@
   padding: 0 15vw;
   height: 7.5vh;
 
+  .desktop {
+    width: 100%;
+  }
+
   .mobile {
+    display: none;
+  }
+
+  .toggle {
     display: none;
   }
 
@@ -120,6 +168,7 @@
     margin: 0;
     padding: 0;
     width: 100%;
+    height: 100%;
     align-items: center;
 
     li {
@@ -507,6 +556,14 @@ $gap: 25px;
     text-align: center;
     margin-top:$base-sizing;
     border-radius: $border-radius;
+    color: white;
+    text-decoration: none;
+    transition: math.div($transition-time, 2) ease-out;
+
+    &:hover {
+      color: white;
+      transform: scale(1.1);
+    }
 
     img {
       margin-bottom: math.div($base-sizing, 4);
@@ -584,18 +641,54 @@ $gap: 25px;
       display: none;
     }
 
-    .mobile {
+    .toggle {
       display: flex;
+      z-index: 4000;
+
+      svg {
+        width: math.div($base-sizing, 2)
+      }
+    }
+
+    input:checked ~ .mobile {
       position: absolute;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
       background-color: $orange;
+      display: flex;
+      flex-direction: column;
+
+      .social__mobile {
+        display: flex;
+        justify-content: center;
+        gap: $base-sizing;
+        margin-bottom: $base-sizing;
+
+        a {
+          height: $base-sizing;
+          display: flex;
+        }
+
+        svg {
+          max-width: .8*$base-sizing;
+          width: 100%;
+        }
+      }
+
+      ul {
+        flex-direction: column;
+        height: 50vh;
+        flex: 1;
+        justify-content: center;
+        gap: math.div($base-sizing, 2);
+      }
 
       img {
-        width: $base-sizing*3;
-        height: $base-sizing*3;
+        max-height: $base-sizing*10;
+        max-width: $base-sizing*10;
+        flex: 1;
       }
     }
   }

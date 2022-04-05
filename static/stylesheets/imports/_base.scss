@@ -302,7 +302,7 @@ pre {
  */
 
 table {
-  width: 100%;
+  max-width: 100%;
   text-align: $table-text-align;
   border-collapse: collapse;
   outline: 1px solid $light-grey;

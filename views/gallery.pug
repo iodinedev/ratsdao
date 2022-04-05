@@ -9,7 +9,7 @@ block content
 
     .cards
       each nft in gallery
-        .card
+        a(href="/nft/" + nft.id + "?p=" + current).card
           img(src="/img/nft/" + nft.id + ".png")
           h3= nft.name
 

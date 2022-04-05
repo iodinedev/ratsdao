@@ -105,6 +105,8 @@ export function init() {
     const skip = 24 * page;
     const gallery = await database.getAllNfts(skip, 24);
 
+    if (gallery && gallery.length === 0) return ctx.redirect("/gallery");
+
     const max = Math.min(6, Math.floor(count / 24));
     var constructionPage = Math.max(Math.min(max - 3, page), 2);
     const pagination: any[] = [
@@ -127,6 +129,26 @@ export function init() {
       current: page,
       pagination: pagination,
     });
+  });
+
+  router.get("/nft/:id", async (ctx) => {
+    const nftId = ctx.params.id;
+    const nft = await database.getNft(nftId);
+    var backLink = 0;
+    if (ctx.request.query && typeof ctx.request.query["p"] === "string")
+      backLink = isNaN(parseInt(ctx.request.query["p"])) ? 0 : parseInt(ctx.request.query["p"]);
+
+    if (!nft) {
+      return ctx.redirect("/");
+    }
+
+    console.log(nft)
+
+    ctx.render("nft.pug", {
+      title: `${nft.name} | RatsDAO`,
+      nft: nft,
+      backLink: backLink
+    })
   });
 
   router.get("/humans.txt", async (ctx) => {
