@@ -14,9 +14,8 @@ console.log(`Running on port ${port}.`)
 const refresh = parseInt(process.env.REFRESH!) * 60 * 1000;
 
 (async () => {
-  //await updateDatabase();
-  /*setInterval(
+  setInterval(
     updateDatabase,
     refresh
-  )*/
+  )
 })();
