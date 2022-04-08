@@ -6,7 +6,7 @@ block content
 
   .section
     .section__info
-      a.back(href="/gallery/" + backLink) &#8617; Back
+      a.back(href="/gallery/" + nft.projectsId + "/" + backLink) &#8617; Back
 
     .section__info
       img(src="/img/nft/" + nft.id alt="")
@@ -19,3 +19,4 @@ block content
           .tags
             each tag in nft.tags
               .tag= tag
+          a(href=nft.url target="_blank" rel="noopener noreferrer") View on IPFS
