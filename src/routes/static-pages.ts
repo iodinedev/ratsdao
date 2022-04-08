@@ -68,13 +68,24 @@ export function init() {
   });
 
   router.get("/gallery", async (ctx) => {
-    const count = await database.count();
+    return ctx.redirect("/projects");
+  });
+
+  router.get("/gallery/:project", async (ctx) => {
+    const project = !isNaN(parseInt(ctx.params.project))
+      ? parseInt(ctx.params.project)
+      : -1;
+    const projectName = await database.getProjectName(project);
+    const count = await database.count(project);
     const page = 0;
     const skip = 24 * page;
-    const gallery = await database.getAllNfts(skip, 24);
+    const gallery = await database.getAllNfts(project, skip, 24);
+
+    if (project == -1 || (gallery && gallery.length === 0))
+      return ctx.redirect("/projects");
 
     const max = Math.min(6, Math.floor(count / 24));
-    var constructionPage = Math.max(Math.min(max - 3, page), 2);
+    var constructionPage = Math.max(Math.min(max - 3, page), 3);
     const pagination: any[] = [
       0,
       "skip",
@@ -84,31 +95,44 @@ export function init() {
       "skip",
       max,
     ];
-    if (pagination[2] == 2) pagination[1] = 1;
-    if (pagination[4] == max - 2) pagination[5] = max - 1;
-    if (pagination[4] + 1 == pagination[6]) pagination.splice(5, 1);
-    if (pagination[0] + 1 == pagination[2]) pagination.splice(1, 1);
+
+    if (max < 5) {
+      pagination[1] = 1;
+      pagination.splice(max);
+    } else {
+      if (pagination[2] == 2) pagination[1] = 1;
+      if (pagination[4] == max - 2) pagination[5] = max - 1;
+      if (pagination[4] + 1 == pagination[6]) pagination.splice(5, 1);
+      if (pagination[0] + 1 == pagination[2]) pagination.splice(1, 1);
+    }
 
     ctx.render("gallery.pug", {
       title: "Gallery | RatsDAO",
       gallery: gallery,
+      project: project,
+      projectName: projectName,
       current: page,
       pagination: pagination,
     });
   });
 
-  router.get("/gallery/:page", async (ctx) => {
-    const count = await database.count();
+  router.get("/gallery/:project/:page", async (ctx) => {
+    const project = !isNaN(parseInt(ctx.params.project))
+      ? parseInt(ctx.params.project)
+      : -1;
+    const projectName = await database.getProjectName(project);
+    const count = await database.count(project);
     const page = !isNaN(parseInt(ctx.params.page))
       ? parseInt(ctx.params.page)
       : 0;
     const skip = 24 * page;
-    const gallery = await database.getAllNfts(skip, 24);
+    const gallery = await database.getAllNfts(project, skip, 24);
 
-    if (gallery && gallery.length === 0) return ctx.redirect("/gallery");
+    if (project == -1 || (gallery && gallery.length === 0))
+      return ctx.redirect("/projects");
 
     const max = Math.min(6, Math.floor(count / 24));
-    var constructionPage = Math.max(Math.min(max - 3, page), 2);
+    var constructionPage = Math.max(Math.min(max - 3, page), 3);
     const pagination: any[] = [
       0,
       "skip",
@@ -118,16 +142,33 @@ export function init() {
       "skip",
       max,
     ];
-    if (pagination[2] == 2) pagination[1] = 1;
-    if (pagination[4] == max - 2) pagination[5] = max - 1;
-    if (pagination[4] + 1 == pagination[6]) pagination.splice(5, 1);
-    if (pagination[0] + 1 == pagination[2]) pagination.splice(1, 1);
+
+    if (max < 5) {
+      pagination[1] = 1;
+      pagination.splice(max + 1);
+    } else {
+      if (pagination[2] == 2) pagination[1] = 1;
+      if (pagination[4] == max - 2) pagination[5] = max - 1;
+      if (pagination[4] + 1 == pagination[6]) pagination.splice(5, 1);
+      if (pagination[0] + 1 == pagination[2]) pagination.splice(1, 1);
+    }
 
     ctx.render("gallery.pug", {
       title: `Gallery | RatsDAO`,
       gallery: gallery,
+      project: project,
+      projectName: projectName,
       current: page,
       pagination: pagination,
+    });
+  });
+
+  router.get("/projects", async (ctx) => {
+    const projects = await database.getProjects();
+
+    ctx.render("projects.pug", {
+      title: "Projects | RatsDAO",
+      projects: projects,
     });
   });
 
@@ -136,19 +177,19 @@ export function init() {
     const nft = await database.getNft(nftId);
     var backLink = 0;
     if (ctx.request.query && typeof ctx.request.query["p"] === "string")
-      backLink = isNaN(parseInt(ctx.request.query["p"])) ? 0 : parseInt(ctx.request.query["p"]);
+      backLink = isNaN(parseInt(ctx.request.query["p"]))
+        ? 0
+        : parseInt(ctx.request.query["p"]);
 
     if (!nft) {
       return ctx.redirect("/");
     }
 
-    console.log(nft)
-
     ctx.render("nft.pug", {
       title: `${nft.name} | RatsDAO`,
       nft: nft,
-      backLink: backLink
-    })
+      backLink: backLink,
+    });
   });
 
   router.get("/humans.txt", async (ctx) => {

@@ -20,8 +20,6 @@ export const updateDatabase = async () => {
 
     returned = rawNfts.length;
     page++;
-
-    returned = 0;
   }
 
   total = nfts.length;
@@ -53,15 +51,27 @@ export const updateDatabase = async () => {
       const quantity: number = isNaN(parseInt(nft.quantity))
         ? 0
         : parseInt(nft.quantity);
+      var projectId = await database.getProjectId(nft.policy_id);
 
-      if (await download({ url: image, name: id })) {
-        downloaded += 1;
+      if (!projectId) {
+        const project = await blockfrost.getProjectName(nft.policy_id);
+        if (project)
+          projectId = await database.createProject(project, nft.policy_id);
+        else
+          projectId = await database.createProject("Miscellaneous", nft.policy_id);
+      }
 
+      if (projectId) {
+        if (await download({url: image, name: id})) downloaded++;
+
+        
         finalNfts.push({
           id: id,
           name: name,
           tags: tags,
           quantity: quantity,
+          projectsId: projectId,
+          url: image
         });
       }
     }

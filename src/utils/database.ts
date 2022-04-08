@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 export const database = {
   async drop() {
     await prisma.nfts.deleteMany();
+    await prisma.projects.deleteMany();
   },
   async addNfts(nfts: Nft[]) {
     try {
@@ -18,7 +19,15 @@ export const database = {
     }
   },
 
-  async count(): Promise<number> {
+  async count(project?): Promise<number> {
+    if (project) {
+      return await prisma.nfts.count({
+        where: {
+          projectsId: project,
+        },
+      });
+    }
+
     return await prisma.nfts.count();
   },
 
@@ -35,12 +44,26 @@ export const database = {
     });
   },
 
-  async getAllNfts(skip = 0, limit = 0): Promise<Nft[] | undefined> {
+  async getAllNfts(project?, skip = 0, limit = 0): Promise<Nft[] | undefined> {
     try {
       var response;
 
-      if (limit === 0) response = await prisma.nfts.findMany({ skip: skip });
-      else response = await prisma.nfts.findMany({ skip: skip, take: limit });
+      if (limit === 0) {
+        response = await prisma.nfts.findMany({
+          where: {
+            projectsId: project,
+          },
+          skip: skip,
+        });
+      } else {
+        response = await prisma.nfts.findMany({
+          where: {
+            projectsId: project,
+          },
+          skip: skip,
+          take: limit,
+        });
+      }
 
       return response;
     } catch (err) {
@@ -72,5 +95,69 @@ export const database = {
     }
 
     return null;
+  },
+
+  async getProjects(): Promise<Project[] | null> {
+    try {
+      const response = await prisma.projects.findMany({
+        select: {
+          id: true,
+          name: true,
+          nfts: true,
+        },
+      });
+
+      return response;
+    } catch (err) {
+      return null;
+    }
+  },
+
+  async getProjectName(id: number): Promise<string | null> {
+    try {
+      const project = await prisma.projects.findUnique({
+        where: {
+          id: id,
+        },
+      });
+
+      if (project) return project.name;
+
+      return null;
+    } catch (err) {
+      return null;
+    }
+  },
+
+  async createProject(name: string, policyId: string): Promise<number | null> {
+    try {
+      const response = await prisma.projects.create({
+        data: {
+          name: name,
+          policyId: policyId,
+        },
+      });
+
+      return response.id;
+    } catch (err) {
+      console.log(err)
+      return null;
+    }
+  },
+
+  async getProjectId(policyId: string): Promise<number | null> {
+    try {
+      var response = await prisma.projects.findUnique({
+        where: {
+          policyId: policyId,
+        },
+      });
+
+      if (!response) return null;
+
+      return response.id;
+    } catch (err) {
+      return null;
+    }
   },
 };

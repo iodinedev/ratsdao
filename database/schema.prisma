@@ -9,8 +9,18 @@ datasource db {
 }
 
 model Nfts {
-  id          String       @id
-  name        String
-  tags        String[]
-  quantity    Int
+  id         String   @id
+  name       String
+  tags       String[]
+  quantity   Int
+  project    Projects @relation(fields: [projectsId], references: [id])
+  projectsId Int
+  url        String
+}
+
+model Projects {
+  id       Int    @id @default(autoincrement())
+  name     String
+  policyId String @unique
+  nfts     Nfts[]
 }

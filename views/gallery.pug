@@ -5,25 +5,35 @@ block content
   .spacer
 
   .section
-    h1.section__header Gallery
+    div(style="width: 100%")
+      //.section__info
+      a.back(href="/projects/") &#8617; Projects
+
+      h1.section__header(style="margin-top: 25px")= projectName
+        |
+        | Collection
 
     .cards
       each nft in gallery
-        a(href="/nft/" + nft.id + "?p=" + current).card
-          img(src="/img/nft/" + nft.id + ".png")
+        a.card(href="/nft/" + nft.id + "?p=" + current)
+          img(src="/img/nft/small_" + nft.id)
           h3= nft.name
-
-    .pagination
-      if (current != pagination[0])
-        a.arrow-left.pagination__circle(href="/gallery/" + (current - 1))
-          span &#10140;
-      each item in pagination
-        if (item == "skip")
-          | &middot;&middot;&middot;
-        else if (item == current)
-          a.pagination__circle.current(href="/gallery/" + item) #{ item + 1 }
-        else
-          a.pagination__circle(href="/gallery/" + item) #{ item + 1 }
-      if (current != pagination[pagination.length - 1])
-        a.arrow-right.pagination__circle(href="/gallery/" + (current + 1))
-          span &#10140;
+    if pagination.length > 1
+      .pagination
+        if (current != pagination[0])
+          a.arrow-left.pagination__circle(
+            href="/gallery/" + project + "/" + (current - 1)
+          )
+            span &#10140;
+        each item in pagination
+          if (item == "skip")
+            | &middot;&middot;&middot;
+          else if (item == current)
+            a.pagination__circle.current(href="/gallery/" + project + "/" + item) #{ item + 1 }
+          else
+            a.pagination__circle(href="/gallery/" + project + "/" + item) #{ item + 1 }
+        if (current != pagination[pagination.length - 1])
+          a.arrow-right.pagination__circle(
+            href="/gallery/" + project + "/" + (current + 1)
+          )
+            span &#10140;

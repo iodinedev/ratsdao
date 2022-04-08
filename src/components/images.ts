@@ -25,19 +25,18 @@ export async function download({
       fs.mkdirSync(dir);
     }
 
-    const filename = path.join(dir, `${name}.png`);
-    const smallfilename = path.join(dir, `${name}.s.png`);
+    http.get(url, async (response) => {
 
-    if (await checkFileExists(filename)) return false;
+      const filename = path.join(dir, `${name}`);
+      const smallfilename = path.join(dir, `small_${name}`);
 
-    var file = fs.createWriteStream(filename);
+      var file = fs.createWriteStream(filename);
 
-    http.get(url, function (response) {
       response.pipe(file);
 
       file.on("finish", function () {
         sharp(file.path)
-          .resize({ width: 150 })
+          .resize({ width: 300 })
           .withMetadata()
           .toFile(smallfilename);
         file.close();

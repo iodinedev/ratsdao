@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  include includes/header.pug
+  .spacer
+
+  .section
+    h1.section__header Collections
+
+    .cards
+      each project in projects
+        a.card.card__project(href="/gallery/" + project.id)
+          .project__images
+            .project__image
+              if project.nfts[0]
+                img(src="/img/nft/small_" + project.nfts[0].id)
+            .project__image
+              if project.nfts[1]
+                img(src="/img/nft/small_" + project.nfts[1].id)
+            .project__image
+              if project.nfts[2]
+                img(src="/img/nft/small_" + project.nfts[2].id)
+          div
+            h3= project.name
+              |
+              | Collection
+            p View All (
+              = project.nfts.length
+              | )

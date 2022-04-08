@@ -551,16 +551,82 @@ $gap: 25px;
     align-items:center;
     overflow: hidden;
     padding-bottom: math.div($base-sizing, 4);
-    width: $base-sizing*4;
+    width: $base-sizing*4.5;
     background: rgba(255 255 255 / 16%);
     text-align: center;
-    margin-top:$base-sizing;
     border-radius: $border-radius;
     color: white;
     text-decoration: none;
     transition: math.div($transition-time, 2) ease-out;
 
-    &:hover {
+    h3 {
+      font-size: 120%;
+    }
+
+    &__project {
+      width: $base-sizing*6;
+      padding: math.div($base-sizing, 2);
+      justify-content: space-between;
+
+      .project__images {
+        position: relative;
+        width: 100%;
+        height: $base-sizing*4;
+      }
+
+      .project__image {
+        position: absolute;
+        width: $base-sizing*3.5;
+        height: $base-sizing*3.5;
+        transform: translate(-50%, -50%);
+        border-radius: $border-radius;
+        overflow: hidden;
+        left: 50%;
+        top: 50%;
+        transition: all $transition-time, box-shadow math.div($transition-time, 2);
+        background-color: rgba(255 255 255 / 6%);
+        display: flex;
+
+        img {
+          object-fit: cover;
+          margin-bottom: 0;
+          width: 150%;
+        }
+
+        &:nth-of-type(1) {
+          z-index: 100;
+        }
+
+        &:nth-of-type(2) {
+          z-index: 99;
+        }
+
+        &:nth-of-type(3) {
+          z-index: 98;
+        }
+      }
+
+      &:hover .project__image {
+        box-shadow: 2px 2px 4px rgba(0 0 0 / 16%);
+        
+        &:nth-of-type(1) {
+          left: 46%;
+          top: 46%;
+        }
+
+        &:nth-of-type(2) {
+          left: 50%;
+          top: 50%;
+        }
+
+        &:nth-of-type(3) {
+          left: 54%;
+          top: 54%;
+        }
+      }
+    }
+
+    &:hover:not(&__project) {
       color: white;
       transform: scale(1.1);
     }
@@ -577,9 +643,11 @@ $gap: 25px;
   background: $orange;
   padding: $base-sizing 15vw;
   gap: math.div($base-sizing, 5);
+  flex-wrap: wrap;
 
   &__col {
     flex: 1;
+    min-width: min($base-sizing*5, 100%);
   }
 }
 
@@ -613,7 +681,7 @@ $gap: 25px;
     font-size: 1.5em;
     background-color: $blue;
 
-    &:hover {
+    &:hover:not(:active) {
       color: white!important;
       cursor: pointer;
       transform: translateY(-8px);
@@ -650,15 +718,32 @@ $gap: 25px;
       }
     }
 
-    input:checked ~ .mobile {
+    .mobile {
+      clip-path: circle(0 at 15vw 0);
+      overflow: hidden;
+      animation: close $transition-time*4 ease-in-out;
       position: absolute;
-      top: 0;
-      left: 0;
+      display: flex;
       width: 100vw;
       height: 100vh;
-      background-color: $orange;
-      display: flex;
       flex-direction: column;
+      top: 0;
+      left: 0;
+      background-color: $orange;
+
+      img {
+        max-height: $base-sizing*10;
+        max-width: $base-sizing*10;
+        flex: 1;
+      }
+
+      ul {
+        flex-direction: column;
+        height: 50vh;
+        flex: 1;
+        justify-content: center;
+        gap: math.div($base-sizing, 2);
+      }
 
       .social__mobile {
         display: flex;
@@ -676,20 +761,53 @@ $gap: 25px;
           width: 100%;
         }
       }
-
-      ul {
-        flex-direction: column;
-        height: 50vh;
-        flex: 1;
-        justify-content: center;
-        gap: math.div($base-sizing, 2);
-      }
-
-      img {
-        max-height: $base-sizing*10;
-        max-width: $base-sizing*10;
-        flex: 1;
-      }
     }
+
+    input:checked ~ .mobile {
+      animation: open $transition-time*4 ease-in-out;
+      clip-path: circle(200% at 15vw 0);
+    }
+  }
+}
+
+@keyframes open {
+  0% {
+    clip-path: circle(0 at 15vw 0);
+  }
+  100% {
+    clip-path: circle(200% at 15vw 0);
+  }
+}
+
+@keyframes close {
+  0% {
+    clip-path: circle(200% at 15vw 0)
+  }
+  100% {
+    clip-path: circle(0 at 15vw 0);
+  }
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: math.div($base-sizing, 4) $base-sizing;
+  border-radius: $border-radius;
+  color: black;
+  background-color: $orange;
+  //transition: transform math.div($transition-time, 2), box-shadow math.div($transition-time, 4);
+  transition: math.div($transition-time, 2);
+  box-shadow: 0 0 0 0 darken($orange, 15%);
+
+  &:hover:not(:active) {
+    transform: translateY(-8px)!important;
+    box-shadow: 0 8px 0 0 darken($orange, 15%);
+  }
+
+  &:active {
+    transition: math.div($transition-time, 4)!important;
+    background: darken($orange, 20%);
+    transform: translateY(0);
+    box-shadow: none;
   }
 }
