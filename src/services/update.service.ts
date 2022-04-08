@@ -19,7 +19,7 @@ export const updateDatabase = async () => {
   while (returned == 100) {
     const rawNfts = await blockfrost.getAllAssets(page);
     console.log(rawNfts)
-    nfts.concat(rawNfts);
+    nfts = nfts.concat(rawNfts);
 
     returned = rawNfts.length;
     page++;
