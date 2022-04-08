@@ -10,6 +10,8 @@ export const updateDatabase = async () => {
   }[] = [];
   var returned = 100;
   var page = 1;
+  var projects: {} = {};
+  var assets: any[] = [];
 
   var downloaded = 0;
   var total = 0;
@@ -40,6 +42,20 @@ export const updateDatabase = async () => {
   for await (const rawNft of nfts) {
     const nft = await blockfrost.getAsset(rawNft.unit);
 
+    assets.push(nft);
+
+    if (nft && nft.policy_id && nft.onchain_metadata) {
+      const name: string = nft.onchain_metadata.name;
+
+      if (!projects[nft.policy_id]) projects[nft.policy_id] = [];
+        
+      projects[nft.policy_id].push(name);
+    }
+  }
+
+  await database.createProjects(projects);
+
+  for await (const nft of assets) {
     if (nft.asset && nft.onchain_metadata && nft.quantity) {
       const id: string = nft.asset;
       const name: string = nft.onchain_metadata.name;
@@ -53,18 +69,9 @@ export const updateDatabase = async () => {
         : parseInt(nft.quantity);
       var projectId = await database.getProjectId(nft.policy_id);
 
-      if (!projectId) {
-        const project = await blockfrost.getProjectName(nft.policy_id);
-        if (project)
-          projectId = await database.createProject(project, nft.policy_id);
-        else
-          projectId = await database.createProject("Miscellaneous", nft.policy_id);
-      }
-
       if (projectId) {
         if (await download({url: image, name: id})) downloaded++;
 
-        
         finalNfts.push({
           id: id,
           name: name,

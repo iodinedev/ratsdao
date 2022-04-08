@@ -129,19 +129,23 @@ export const database = {
     }
   },
 
-  async createProject(name: string, policyId: string): Promise<number | null> {
+  async createProjects(policies: {[id: string]: string[]}): Promise<Boolean> {
+    const projectNames: {name: string, policyId: string}[] = [];
+
+    for await (const [key, value] of Object.entries(policies)) {
+      projectNames.push({name: await sharedStart(value), policyId: key});
+    }
+
     try {
-      const response = await prisma.projects.create({
-        data: {
-          name: name,
-          policyId: policyId,
-        },
+      await prisma.projects.createMany({
+        data: projectNames,
+        skipDuplicates: true
       });
 
-      return response.id;
+      return true;
     } catch (err) {
       console.log(err)
-      return null;
+      return false;
     }
   },
 
@@ -161,3 +165,17 @@ export const database = {
     }
   },
 };
+
+
+async function sharedStart(
+  A: string[]
+): Promise<string> {
+  var sorted = A.concat().sort(),
+    a1 = sorted[0],
+    a2 = sorted[sorted.length - 1],
+    i = 0;
+  if (!a1 || !a2) return "";
+  var L = a1.length;
+  while (i < L && a1.charAt(i) === a2.charAt(i)) i++;
+  return a1.slice(0, i).split("#")[0].trim();
+}
