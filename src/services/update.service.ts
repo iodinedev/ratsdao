@@ -18,7 +18,8 @@ export const updateDatabase = async () => {
 
   while (returned == 100) {
     const rawNfts = await blockfrost.getAllAssets(page);
-    console.log(rawNfts)
+    if (rawNfts && rawNfts.status_code && rawNfts.status_code === 402) return console.log("Usage limit reached.");
+
     nfts = nfts.concat(rawNfts);
 
     returned = rawNfts.length;
