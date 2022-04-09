@@ -69,7 +69,7 @@ html(lang="en-us")
           viewportmeta.content = "width=device-width, maximum-scale=1.0, initial-scale=1.0";
         }
       }
-  body
+  body(onload="setTimeout(function(){document.body.className=\"\";},800);").preload
     #primary_content(
       style="display: flex; flex-direction: column; justify-content: space-between; min-height: 100vh"
     )

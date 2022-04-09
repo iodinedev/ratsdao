@@ -11,7 +11,7 @@ for (let route of ['static-pages']) {
 
 console.log(`Running on port ${port}.`)
 
-const refresh = parseInt(process.env.REFRESH!) * 60 * 1000;
+const refresh = parseInt(process.env.REFRESH!) * 60 * 60 * 1000;
 
 (async () => {
   setInterval(

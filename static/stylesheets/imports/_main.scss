@@ -1,5 +1,11 @@
 @use "sass:math";
 
+body.preload .mobile {
+  animation-duration: 0s !important;
+  -webkit-animation-duration: 0s !important;
+  transition: all 0s !important;
+}
+
 .vr {
   margin-top: $base-sizing;
 }
@@ -18,6 +24,7 @@
   align-items: center;
   text-align: center;
   height: 100vh;
+  width: 100vw;
   font-family: "Fredoka One", sans-serif;
 
   &__content {
@@ -34,8 +41,8 @@ a.back {
   text-decoration: none;
   background: rgba(255 255 255 / 16%);
   border-radius: 50px;
-  width: 120px;
-  padding: 0.2em;
+  max-width: 150px;
+  padding: 0.2em 1em;
   display: flex;
   justify-content: center;
   color: white
@@ -43,7 +50,7 @@ a.back {
 
 .section {
   color: white;
-  background: #121212;
+  background: $pink;//#121212;
   flex-direction: column;
   align-items: center;
   gap: $base-sizing;
@@ -83,10 +90,9 @@ a.back {
   }
 
   &__text {
-    background: rgba(255 255 255 / 16%);
-    box-shadow: 2px 2px 4 rgba(255 255 255 / 7%);
+    //box-shadow: 5px 5px 10px rgb(0 0 0 / 16%);
     padding: $base-sizing;
-    border-radius: $border-radius;
+    //border-radius: $border-radius;
     max-width: 1000px;
     width: 100%;
     min-width: min(100vw, 500px);
@@ -101,15 +107,13 @@ a.back {
 
 .header {
   display: flex;
-  padding: math.div($base-sizing, 2) 15vw;
   width: 100vw;
   height: 10vh;
   top: 0;
-  position: fixed;
+  position: absolute;
   z-index: 2000;
-  background: $orange;
-  padding: 0 15vw;
-  height: 7.5vh;
+  padding: 0;
+  height: 10vh;
 
   .desktop {
     width: 100%;
@@ -128,10 +132,10 @@ a.back {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    position: fixed;
-    height: 7.5vh;
+    position: absolute;
+    height: 10vh;
     top: 0;
-    right: $base-sizing;
+    right: 10vw;
     z-index: 10;
     gap: math.div($base-sizing, 3);
     transition: height $transition-time!important;
@@ -140,23 +144,31 @@ a.back {
       color: white;
       font-size: 1.5em;
       display: flex;
+      width: $base-sizing;
+      height: $base-sizing;
+      align-items: center;
+      justify-content: center;
+      background-color: $blue;
+      border-radius: 100%;
+      transition: $transition-time;
   
       svg {
-        width: 100%;
+        width: math.div($base-sizing, 2);
         max-height: math.div($base-sizing, 1.65);
         transition: math.div($transition-time, 2);
+        fill: white;
       }
   
-      &.notion:hover svg {
-        fill: #e16259;
+      &.notion:hover {
+        background: #e16259;
       }
   
-      &.twitter:hover svg {
-        fill: #1DA1F2;
+      &.twitter:hover {
+        background: #1DA1F2;
       }
   
-      &.discord:hover svg {
-        fill: #7289da;
+      &.discord:hover {
+        background: #7289da;
       }
     }
   }
@@ -167,7 +179,7 @@ a.back {
     justify-content: space-around;
     margin: 0;
     padding: 0;
-    width: 100%;
+    width: 50%;
     height: 100%;
     align-items: center;
 
@@ -176,8 +188,6 @@ a.back {
       justify-content: center;
       align-items: center;
       list-style: none;
-      max-width: $base-sizing*4;
-      width: 100%;
       height: $base-sizing;
 
       a {
@@ -186,7 +196,7 @@ a.back {
         letter-spacing: 0.15em;
         text-decoration: none;
         font-size: .8em;
-        color: black;
+        color: white;
         padding: math.div($base-sizing, 5) 0;
         display: flex;
         align-items: center;
@@ -199,7 +209,7 @@ a.back {
           height: 2px;
           left: 50%;
           position: absolute;
-          background: black;
+          background: white;
           transition: width 0.3s ease 0s, left 0.3s ease 0s;
           width: 0;
         }
@@ -386,7 +396,7 @@ $gap: 25px;
 .hero-cover {
   position: absolute;
   z-index: 500;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   background-color: rgba(0 0 0 / 75%);
 }
@@ -420,6 +430,7 @@ $gap: 25px;
       box-sizing: border-box;
       padding: 0;
       animation: scroll $animation-time reverse linear infinite;
+      animation-delay: .2s;
       display: flex;
       width: $base-sizing*80;
 
@@ -542,7 +553,7 @@ $gap: 25px;
   flex-direction: row;
   flex-wrap: wrap;
   gap: $base-sizing;
-  justify-content: space-between;
+  justify-content: space-around;
 
   .card {
     position:relative;
@@ -640,14 +651,152 @@ $gap: 25px;
 .footer {
   display: flex;
   width: 100vw;
-  background: $orange;
-  padding: $base-sizing 15vw;
-  gap: math.div($base-sizing, 5);
-  flex-wrap: wrap;
+  padding: 5vh 10vw;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  height: $base-sizing*6;
+
+  h1 {
+    text-shadow: 4px 4px $blue;
+  }
 
   &__col {
     flex: 1;
     min-width: min($base-sizing*5, 100%);
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .background, .gradient-mask {
+    width: 100%;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    background: $pink;
+  }
+
+  .gradient-mask {
+    height: $base-sizing*10;
+    background: $pink;
+    background: linear-gradient(180deg,$pink 45%, rgba($pink, 0));
+  }
+
+  .background {
+    height: $base-sizing*8;
+    z-index: -1;
+    bottom: 0;
+  }
+
+  .intersect {
+    z-index: -2;
+    height: 100%;
+    background: url(/img/intersect.svg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+
+  .line {
+    z-index: -2;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(white, 70%);
+    bottom: -1px;
+    -webkit-animation-duration: 7s;
+    animation-duration: 7s;
+    -webkit-animation-timing-function: cubic-bezier(.28,.56,.28,.57);
+    animation-timing-function: cubic-bezier(.28,.56,.28,.57);
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: line-anim;
+    animation-name: line-anim;
+  }
+
+  .line-1 {
+    -webkit-animation-delay: -1.4s;
+    animation-delay: -1.4s;
+  }
+
+  .line-2 {
+    -webkit-animation-delay: -2.8s;
+    animation-delay: -2.8s;
+  }
+
+  .line-3 {
+    -webkit-animation-delay: -4.2s;
+    animation-delay: -4.2s;
+  }
+
+  .line-4 {
+    -webkit-animation-delay: -5.6s;
+    animation-delay: -5.6s;
+  }
+
+  .social__media {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    gap: math.div($base-sizing, 3);
+    transition: height $transition-time!important;
+  
+    a {
+      color: white;
+      font-size: 1.5em;
+      display: flex;
+      width: $base-sizing*.75;
+      height: $base-sizing*.75;
+      align-items: center;
+      justify-content: center;
+      background-color: $blue;
+      border-radius: 100%;
+      transition: $transition-time;
+  
+      svg {
+        width: math.div($base-sizing, 2)*.75;
+        max-height: math.div($base-sizing, 1.65);
+        transition: math.div($transition-time, 2);
+        fill: white;
+      }
+  
+      &.notion:hover {
+        background: #e16259;
+      }
+  
+      &.twitter:hover {
+        background: #1DA1F2;
+      }
+  
+      &.discord:hover {
+        background: #7289da;
+      }
+    }
+  }
+}
+
+@-webkit-keyframes line-anim {
+  0% {
+      bottom: -1px
+  }
+
+  to {
+      bottom: 202px
+  }
+}
+
+@keyframes line-anim {
+  0% {
+      bottom: -1px
+  }
+
+  to {
+      bottom: 202px
   }
 }
 
@@ -710,8 +859,21 @@ $gap: 25px;
     }
 
     .toggle {
+      cursor: pointer;
       display: flex;
       z-index: 4000;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      height: 10vh;
+      width: $base-sizing;
+      top: 0;
+      left: 10vw;
+      z-index: 10;
+      gap: math.div($base-sizing, 3);
+      fill: white;
 
       svg {
         width: math.div($base-sizing, 2)
@@ -721,7 +883,7 @@ $gap: 25px;
     .mobile {
       clip-path: circle(0 at 15vw 0);
       overflow: hidden;
-      animation: close $transition-time*4 ease-in-out;
+      animation: close $transition-time*2 ease-in-out;
       position: absolute;
       display: flex;
       width: 100vw;
@@ -740,6 +902,7 @@ $gap: 25px;
       ul {
         flex-direction: column;
         height: 50vh;
+        width: 100vw;
         flex: 1;
         justify-content: center;
         gap: math.div($base-sizing, 2);
@@ -764,27 +927,48 @@ $gap: 25px;
     }
 
     input:checked ~ .mobile {
-      animation: open $transition-time*4 ease-in-out;
+      animation: open $transition-time*2 ease-in-out;
       clip-path: circle(200% at 15vw 0);
+    }
+  }
+
+  .footer {
+    flex-direction: column;
+    padding: 0 10vw 5vh 10vw;
+
+    &__col {
+      justify-content: center;
+
+      &__1 {
+        order: 1;
+      }
+
+      &__2 {
+        order: 2;
+      }
+
+      &__3 {
+        order: 3;
+      }
     }
   }
 }
 
 @keyframes open {
   0% {
-    clip-path: circle(0 at 15vw 0);
+    clip-path: circle(0 at calc(10vw + #{math.div($base-sizing, 2)}) 5vh);
   }
   100% {
-    clip-path: circle(200% at 15vw 0);
+    clip-path: circle(200% at calc(10vw + #{math.div($base-sizing, 2)}) 5vh);
   }
 }
 
 @keyframes close {
   0% {
-    clip-path: circle(200% at 15vw 0)
+    clip-path: circle(200% at calc(10vw + #{math.div($base-sizing, 2)}) 5vh)
   }
   100% {
-    clip-path: circle(0 at 15vw 0);
+    clip-path: circle(0 at calc(10vw + #{math.div($base-sizing, 2)}) 5vh);
   }
 }
 
@@ -796,8 +980,12 @@ $gap: 25px;
   color: black;
   background-color: $orange;
   //transition: transform math.div($transition-time, 2), box-shadow math.div($transition-time, 4);
-  transition: math.div($transition-time, 2);
+  transition: all math.div($transition-time, 1.5);
   box-shadow: 0 0 0 0 darken($orange, 15%);
+
+  &:hover {
+    color: black;
+  }
 
   &:hover:not(:active) {
     transform: translateY(-8px)!important;
@@ -805,9 +993,30 @@ $gap: 25px;
   }
 
   &:active {
-    transition: math.div($transition-time, 4)!important;
+    transition: all math.div($transition-time, 4)!important;
     background: darken($orange, 20%);
     transform: translateY(0);
     box-shadow: none;
+  }
+}
+
+.partners {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: math.div($base-sizing, 2);
+  justify-content: space-around;
+
+  .partner {
+    width: $base-sizing*4;
+    height: $base-sizing*4.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+      width: $base-sizing*3
+    }
   }
 }

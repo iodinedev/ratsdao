@@ -30,16 +30,6 @@ body {
   display: -webkit-flex;
   display: flex;
   flex-direction: column;
-
-  &.loaded {
-    .dropdown {
-      transition: math.div($transition-time, 2);
-    }
-
-    a {
-      transition: math.div($transition-time, 2);
-    }
-  }
 }
 
 *:focus-visible {
@@ -149,12 +139,10 @@ h1, h2, h3, h4, h5, h6 {
  */
 
 a {
-  color: #80a6ff;
+  color: white;
   text-underline-offset: 3px;
+  transition: math.div($transition-time, 2);
   
-  &:hover {
-    color: var(--text-color);
-  }
   .social-media-list &:hover {
     text-decoration: none;
     .username {
@@ -317,7 +305,7 @@ table {
     padding: math.div($base-sizing, 2);
   }
   th {
-    background-color: $pink;
+    background-color: $orange;
     color: white;
     border: 1px solid darken($light-grey, 6%);
     border-top: none;
