@@ -34,18 +34,19 @@ export async function download({
 
       response.pipe(file);
 
-      file.on("finish", function () {
-        sharp(file.path)
+      file.on("finish", async () => {
+        await sharp(file.path)
           .resize({ width: 600 })
           .avif()
           .withMetadata()
           .toFile(avifsmallfilename);
 
-        sharp(file.path)
+        await sharp(file.path)
           .resize({ width: 150 })
           .avif()
           .withMetadata()
           .toFile(smallfilename);
+
         file.close();
       });
     });
