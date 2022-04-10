@@ -29,6 +29,7 @@ export async function download({
 
       const filename = path.join(dir, `${name}`);
       const smallfilename = path.join(dir, `small_${name}`);
+      const avifsmallfilename = path.join(dir, `avif_small_${name}.avif`);
 
       var file = fs.createWriteStream(filename);
 
@@ -36,7 +37,14 @@ export async function download({
 
       file.on("finish", function () {
         sharp(file.path)
-          .resize({ width: 300 })
+          .resize({ width: 600 })
+          .avif()
+          .withMetadata()
+          .toFile(avifsmallfilename);
+
+        sharp(file.path)
+          .resize({ width: 150 })
+          .avif()
           .withMetadata()
           .toFile(smallfilename);
         file.close();

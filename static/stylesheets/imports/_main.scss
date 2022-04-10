@@ -24,7 +24,7 @@ body.preload .mobile {
   align-items: center;
   text-align: center;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   font-family: "Fredoka One", sans-serif;
 
   &__content {
@@ -64,7 +64,7 @@ a.back {
   &__info {
     max-width: 1000px;
     width: 100%;
-    min-width: min(100vw, 500px);
+    min-width: min(100%, 500px);
     display: flex;
     flex-direction: row;
     gap: $base-sizing;
@@ -95,7 +95,7 @@ a.back {
     //border-radius: $border-radius;
     max-width: 1000px;
     width: 100%;
-    min-width: min(100vw, 500px);
+    min-width: min(100%, 500px);
   }
 
   a {
@@ -107,7 +107,7 @@ a.back {
 
 .header {
   display: flex;
-  width: 100vw;
+  width: 100%;
   height: 10vh;
   top: 0;
   position: absolute;
@@ -396,7 +396,7 @@ $gap: 25px;
 .hero-cover {
   position: absolute;
   z-index: 500;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   background-color: rgba(0 0 0 / 75%);
 }
@@ -404,7 +404,7 @@ $gap: 25px;
 .background__wrapper {
   position: absolute;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -476,7 +476,7 @@ $gap: 25px;
         -webkit-transition: 7s;
         transition: 7s;
 
-        img {
+        picture, img {
           height: 100%;
           object-fit: cover;
         }
@@ -650,7 +650,7 @@ $gap: 25px;
 
 .footer {
   display: flex;
-  width: 100vw;
+  width: 100%;
   padding: 5vh 10vw;
   text-align: center;
   position: relative;
@@ -852,6 +852,99 @@ $gap: 25px;
   }
 }
 
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: math.div($base-sizing, 4) $base-sizing;
+  border-radius: $border-radius;
+  color: black;
+  background-color: $orange;
+  //transition: transform math.div($transition-time, 2), box-shadow math.div($transition-time, 4);
+  transition: all math.div($transition-time, 1.5);
+  box-shadow: 0 0 0 0 darken($orange, 15%);
+
+  &:hover {
+    color: black;
+  }
+
+  &:hover:not(:active) {
+    transform: translateY(-8px)!important;
+    box-shadow: 0 8px 0 0 darken($orange, 15%);
+  }
+
+  &:active {
+    transition: all math.div($transition-time, 4)!important;
+    background: darken($orange, 20%);
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+.partners {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: math.div($base-sizing, 2);
+  justify-content: space-around;
+
+  .partner {
+    width: $base-sizing*4;
+    gap: math.div($base-sizing, 2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+      width: $base-sizing*2.5
+    }
+  }
+}
+
+.welcome {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40vw;
+  right: 0;
+  background-color: white;
+  color: black;
+  height: $base-sizing*10;
+  padding-left: $base-sizing*2.5;
+  padding-right: $base-sizing;
+  border-top-left-radius: $border-radius;
+  border-bottom-left-radius: $border-radius;
+
+  .icon {
+    position: absolute;
+    width: $base-sizing*4;
+    height: $base-sizing*4;
+    left: -2*$base-sizing;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__spacer {
+    height: $base-sizing*10;
+    display: flex;
+    align-items: center;
+  }
+
+  &__video {
+    position: absolute;
+    left: 10vw;
+
+    iframe {
+      width: min(37vw, 550px);
+      height: 309px;
+      border-radius: $border-radius;
+    }
+  }
+}
+
+
+
 @media screen and (max-width: 1200px) {
   .header {
     .desktop {
@@ -886,7 +979,7 @@ $gap: 25px;
       animation: close $transition-time*2 ease-in-out;
       position: absolute;
       display: flex;
-      width: 100vw;
+      width: 100%;
       height: 100vh;
       flex-direction: column;
       top: 0;
@@ -902,7 +995,7 @@ $gap: 25px;
       ul {
         flex-direction: column;
         height: 50vh;
-        width: 100vw;
+        width: 100%;
         flex: 1;
         justify-content: center;
         gap: math.div($base-sizing, 2);
@@ -952,6 +1045,46 @@ $gap: 25px;
       }
     }
   }
+
+  .welcome {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40vw;
+    right: 0;
+    background-color: #fff;
+    color: #000;
+    height: unset;
+    width: 100vw;
+    text-align: center;
+    padding: $base-sizing*2 $base-sizing;
+    margin-top: $base-sizing*2;
+
+    .icon {
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    &__spacer {
+      flex-direction: column-reverse;
+      height: unset;
+    }
+
+    &__video {
+      position: relative;
+      left: unset;
+      width: 100%;
+      height: 35vh;
+      margin-top: $base-sizing;
+
+      iframe {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 }
 
 @keyframes open {
@@ -969,54 +1102,5 @@ $gap: 25px;
   }
   100% {
     clip-path: circle(0 at calc(10vw + #{math.div($base-sizing, 2)}) 5vh);
-  }
-}
-
-.btn {
-  display: inline-block;
-  text-decoration: none;
-  padding: math.div($base-sizing, 4) $base-sizing;
-  border-radius: $border-radius;
-  color: black;
-  background-color: $orange;
-  //transition: transform math.div($transition-time, 2), box-shadow math.div($transition-time, 4);
-  transition: all math.div($transition-time, 1.5);
-  box-shadow: 0 0 0 0 darken($orange, 15%);
-
-  &:hover {
-    color: black;
-  }
-
-  &:hover:not(:active) {
-    transform: translateY(-8px)!important;
-    box-shadow: 0 8px 0 0 darken($orange, 15%);
-  }
-
-  &:active {
-    transition: all math.div($transition-time, 4)!important;
-    background: darken($orange, 20%);
-    transform: translateY(0);
-    box-shadow: none;
-  }
-}
-
-.partners {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: math.div($base-sizing, 2);
-  justify-content: space-around;
-
-  .partner {
-    width: $base-sizing*4;
-    height: $base-sizing*4.5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-
-    img {
-      width: $base-sizing*3
-    }
   }
 }

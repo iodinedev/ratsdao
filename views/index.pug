@@ -51,20 +51,25 @@ block content
         ) Join
 
   .section
-    .section__text
-      h2 Welcome to RatsDAO
+    .section__text.welcome__spacer
+      .welcome__video
+        iframe(src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen)
+      .welcome
+        img(src="/img/ratsdao.png").icon
+        h2 Welcome to RatsDAO
+        p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas officia iste ipsam voluptatum nostrum, cumque minus fuga ea eius qui.
     .section__text
       h2 Partners
-      .partners
-        .partner
+      .partners.vr
+        a(href="https://dripdropz.io/" rel="noopener noreferrer" target="_blank").partner
           img(src="/img/partners/logo-2.svg")
           h3 DripDropz
-        .partner
+        a(href="https://www.theadao.io/" rel="noopener noreferrer" target="_blank").partner
           img(src="/img/partners/adao.svg")
           h3 ADAO
-        .partner
+        a(href="https://metadams.io/" rel="noopener noreferrer" target="_blank").partner
           img(src="/img/partners/68dfa6da48e3229faadb4bb2c875664b.svg")
           h3 MetaDams
-        .partner
+        a(href="https://www.cardanoforms.io/" rel="noopener noreferrer" target="_blank").partner
           img(src="/img/partners/Anomaly.jpeg")
           h3 CardaForms
