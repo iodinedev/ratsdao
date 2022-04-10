@@ -84,7 +84,7 @@ a.back {
 
     img {
       flex: 1;
-      max-width: $base-sizing*10;
+      max-width: min($base-sizing*10, 100%);
       height: auto;
       border-radius: $border-radius;
     }
