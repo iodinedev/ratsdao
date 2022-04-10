@@ -131,27 +131,27 @@ export function init() {
     if (project == -1 || (gallery && gallery.length === 0))
       return ctx.redirect("/projects");
 
-      const max = Math.min(6, Math.floor(count / 24));
-      var constructionPage = Math.max(Math.min(max - 3, page), 3);
-      const pagination: any[] = [
-        0,
-        "skip",
-        constructionPage - 1,
-        constructionPage,
-        constructionPage + 1,
-        "skip",
-        max,
-      ];
-  
-      if (max < 5) {
-        pagination[1] = 1;
-        pagination.splice(max);
-      } else {
-        if (pagination[2] == 2) pagination[1] = 1;
-        if (pagination[4] == max - 2) pagination[5] = max - 1;
-        if (pagination[4] + 1 == pagination[6]) pagination.splice(5, 1);
-        if (pagination[0] + 1 == pagination[2]) pagination.splice(1, 1);
-      }
+    const max = Math.min(6, Math.floor(count / 24));
+    var constructionPage = Math.max(Math.min(max - 3, page), 3);
+    const pagination: any[] = [
+      0,
+      "skip",
+      constructionPage - 1,
+      constructionPage,
+      constructionPage + 1,
+      "skip",
+      max,
+    ];
+
+    if (max < 5) {
+      pagination[1] = 1;
+      pagination.splice(max);
+    } else {
+      if (pagination[2] == 2) pagination[1] = 1;
+      if (pagination[4] == max - 2) pagination[5] = max - 1;
+      if (pagination[4] + 1 == pagination[6]) pagination.splice(5, 1);
+      if (pagination[0] + 1 == pagination[2]) pagination.splice(1, 1);
+    }
 
     ctx.render("gallery.pug", {
       title: `Gallery | RatsDAO`,

@@ -67,6 +67,7 @@ a.back {
     min-width: min(100%, 500px);
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap-reverse;
     gap: $base-sizing;
 
     .tags {
@@ -82,16 +83,20 @@ a.back {
     }
 
     img {
-      width: 100%;
+      flex: 1;
       max-width: $base-sizing*10;
       height: auto;
       border-radius: $border-radius;
+    }
+
+    .text {
+      flex: 1;
     }
   }
 
   &__text {
     //box-shadow: 5px 5px 10px rgb(0 0 0 / 16%);
-    padding: $base-sizing;
+    //padding: $base-sizing;
     //border-radius: $border-radius;
     max-width: 1000px;
     width: 100%;
@@ -645,6 +650,12 @@ $gap: 25px;
     img {
       margin-bottom: math.div($base-sizing, 4);
     }
+
+    &__partner {
+      width: $base-sizing*4;
+      justify-content: space-between;
+      padding: math.div($base-sizing, 2);
+    }
   }
 }
 
@@ -880,27 +891,6 @@ $gap: 25px;
   }
 }
 
-.partners {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: math.div($base-sizing, 2);
-  justify-content: space-around;
-
-  .partner {
-    width: $base-sizing*4;
-    gap: math.div($base-sizing, 2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-
-    img {
-      width: $base-sizing*2.5
-    }
-  }
-}
-
 .welcome {
   position: absolute;
   display: flex;
@@ -918,9 +908,9 @@ $gap: 25px;
 
   .icon {
     position: absolute;
-    width: $base-sizing*4;
-    height: $base-sizing*4;
-    left: -2*$base-sizing;
+    width: 10vw;
+    height: 10vw;
+    left: -5vw;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -936,8 +926,8 @@ $gap: 25px;
     left: 10vw;
 
     iframe {
-      width: min(37vw, 550px);
-      height: 309px;
+      width: 40vw;
+      height: 22vw;
       border-radius: $border-radius;
     }
   }
@@ -1046,24 +1036,43 @@ $gap: 25px;
     }
   }
 
+  .section {
+    &__info {
+      text-align: center;
+
+      &__justify {
+        align-items: center;
+        flex-direction: column-reverse;
+      }
+
+      .text {
+        width: 100%;
+      }
+    }
+
+    &__text {
+      h2 {
+        text-align: center;
+      }
+    }
+  }
+
   .welcome {
     position: relative;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 40vw;
     right: 0;
-    background-color: #fff;
-    color: #000;
     height: unset;
     width: 100vw;
     text-align: center;
     padding: $base-sizing*2 $base-sizing;
     margin-top: $base-sizing*2;
+    border-radius: 0;
 
     .icon {
       left: 50%;
       top: 0;
+      width: $base-sizing*3.5;
+      height: $base-sizing*3.5;
       transform: translate(-50%, -50%);
     }
 
@@ -1075,13 +1084,11 @@ $gap: 25px;
     &__video {
       position: relative;
       left: unset;
-      width: 100%;
-      height: 35vh;
       margin-top: $base-sizing;
 
       iframe {
-        width: 100%;
-        height: 100%;
+        width: 80vw;
+        height: 45vw;
       }
     }
   }

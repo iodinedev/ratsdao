@@ -12,16 +12,16 @@ block content
           .project__images
             .project__image
               if project.nfts[0]
-                img(src="/img/nft/small_" + project.nfts[0].id alt="")
+                img(src="/img/nft/small_" + project.nfts[0].id, alt="")
             .project__image
               if project.nfts[1]
-                img(src="/img/nft/small_" + project.nfts[1].id alt="")
+                img(src="/img/nft/small_" + project.nfts[1].id, alt="")
             .project__image
               if project.nfts[2]
-                img(src="/img/nft/small_" + project.nfts[2].id alt="")
+                img(src="/img/nft/small_" + project.nfts[2].id, alt="")
           div
             h3= project.name
-              |
+              |&#32;
               | Collection
             p View All (
               = project.nfts.length

@@ -18,7 +18,8 @@ export const updateDatabase = async () => {
 
   while (returned == 100) {
     const rawNfts = await blockfrost.getAllAssets(page);
-    if (rawNfts && rawNfts.status_code && rawNfts.status_code === 402) return console.log("Usage limit reached.");
+    if (rawNfts && rawNfts.status_code && rawNfts.status_code === 402)
+      return console.log("Usage limit reached.");
 
     nfts = nfts.concat(rawNfts);
 
@@ -50,7 +51,7 @@ export const updateDatabase = async () => {
       const name: string = nft.onchain_metadata.name;
 
       if (!projects[nft.policy_id]) projects[nft.policy_id] = [];
-        
+
       projects[nft.policy_id].push(name);
     }
   }
@@ -72,7 +73,7 @@ export const updateDatabase = async () => {
       var projectId = await database.getProjectId(nft.policy_id);
 
       if (projectId) {
-        if (await download({url: image, name: id})) downloaded++;
+        if (await download({ url: image, name: id })) downloaded++;
 
         finalNfts.push({
           id: id,
@@ -80,7 +81,7 @@ export const updateDatabase = async () => {
           tags: tags,
           quantity: quantity,
           projectsId: projectId,
-          url: image
+          url: image,
         });
       }
     }

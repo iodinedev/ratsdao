@@ -9,13 +9,13 @@ block content
       a.back(href="/projects/") &#8617; Projects
 
       h1.section__header(style="margin-top: 25px")= projectName
-        |
+        |&#32;
         | Collection
 
     .cards
       each nft in gallery
         a.card(href="/nft/" + nft.id + "?p=" + current)
-          img(src="/img/nft/small_" + nft.id alt="")
+          img(src="/img/nft/small_" + nft.id, alt="")
           h3= nft.name
     if pagination.length > 1
       .pagination
@@ -28,7 +28,9 @@ block content
           if (item == "skip")
             | &middot;&middot;&middot;
           else if (item == current)
-            a.pagination__circle.current(href="/gallery/" + project + "/" + item) #{ item + 1 }
+            a.pagination__circle.current(
+              href="/gallery/" + project + "/" + item
+            ) #{ item + 1 }
           else
             a.pagination__circle(href="/gallery/" + project + "/" + item) #{ item + 1 }
         if (current != pagination[pagination.length - 1])

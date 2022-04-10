@@ -26,7 +26,6 @@ export async function download({
     }
 
     http.get(url, async (response) => {
-
       const filename = path.join(dir, `${name}`);
       const smallfilename = path.join(dir, `small_${name}`);
       const avifsmallfilename = path.join(dir, `avif_small_${name}.avif`);

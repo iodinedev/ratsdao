@@ -53,23 +53,46 @@ block content
   .section
     .section__text.welcome__spacer
       .welcome__video
-        iframe(src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen)
+        iframe(
+          src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
+          frameborder="0",
+          allow="autoplay; encrypted-media",
+          allowfullscreen
+        )
       .welcome
-        img(src="/img/ratsdao.png").icon
+        img.icon(src="/img/ratsdao.png")
         h2 Welcome to RatsDAO
-        p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas officia iste ipsam voluptatum nostrum, cumque minus fuga ea eius qui.
+        p We made a video to help you get a quick introduction to our community; it covers who we are and what we hope to achieve.
+        p.vr Give it a watch — we promise it's short.
+
     .section__text
-      h2 Partners
-      .partners.vr
-        a(href="https://dripdropz.io/" rel="noopener noreferrer" target="_blank").partner
+      h2 Our Partners
+      .cards.vr
+        a.card.card__partner(
+          href="https://dripdropz.io/",
+          rel="noopener noreferrer",
+          target="_blank"
+        )
           img(src="/img/partners/logo-2.svg")
           h3 DripDropz
-        a(href="https://www.theadao.io/" rel="noopener noreferrer" target="_blank").partner
+        a.card.card__partner(
+          href="https://www.theadao.io/",
+          rel="noopener noreferrer",
+          target="_blank"
+        )
           img(src="/img/partners/adao.svg")
           h3 ADAO
-        a(href="https://metadams.io/" rel="noopener noreferrer" target="_blank").partner
+        a.card.card__partner(
+          href="https://metadams.io/",
+          rel="noopener noreferrer",
+          target="_blank"
+        )
           img(src="/img/partners/68dfa6da48e3229faadb4bb2c875664b.svg")
           h3 MetaDams
-        a(href="https://www.cardanoforms.io/" rel="noopener noreferrer" target="_blank").partner
+        a.card.card__partner(
+          href="https://www.cardanoforms.io/",
+          rel="noopener noreferrer",
+          target="_blank"
+        )
           img(src="/img/partners/Anomaly.jpeg")
           h3 CardaForms

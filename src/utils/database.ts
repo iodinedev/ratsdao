@@ -129,22 +129,22 @@ export const database = {
     }
   },
 
-  async createProjects(policies: {[id: string]: string[]}): Promise<Boolean> {
-    const projectNames: {name: string, policyId: string}[] = [];
+  async createProjects(policies: { [id: string]: string[] }): Promise<Boolean> {
+    const projectNames: { name: string; policyId: string }[] = [];
 
     for await (const [key, value] of Object.entries(policies)) {
-      projectNames.push({name: await sharedStart(value), policyId: key});
+      projectNames.push({ name: await sharedStart(value), policyId: key });
     }
 
     try {
       await prisma.projects.createMany({
         data: projectNames,
-        skipDuplicates: true
+        skipDuplicates: true,
       });
 
       return true;
     } catch (err) {
-      console.log(err)
+      console.log(err);
       return false;
     }
   },
@@ -166,10 +166,7 @@ export const database = {
   },
 };
 
-
-async function sharedStart(
-  A: string[]
-): Promise<string> {
+async function sharedStart(A: string[]): Promise<string> {
   var sorted = A.concat().sort(),
     a1 = sorted[0],
     a2 = sorted[sorted.length - 1],
