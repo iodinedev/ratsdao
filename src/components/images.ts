@@ -38,13 +38,11 @@ export async function download({
         try {
           const small = await sharp(file.path);
           await small.resize({ width: 200 })
-          await small.withMetadata()
           await small.toFile(smallfilename);
 
           const avif = await sharp(file.path);
           await avif.resize({ width: 600 })
           await avif.avif();
-          await avif.withMetadata()
           await avif.toFile(avifsmallfilename);
         } catch(err) {
           console.log(err)
