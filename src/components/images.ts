@@ -1,7 +1,7 @@
 import http from "https";
 import fs from "fs";
 import { URL } from "url";
-import sharp from "sharp";
+import Jimp from "jimp";
 import path from "path";
 
 function checkFileExists(file) {
@@ -36,14 +36,25 @@ export async function download({
 
       file.on("finish", async () => {
         try {
-          const small = await sharp(file.path);
-          await small.resize({ width: 200 })
-          await small.toFile(smallfilename);
+          await Jimp.read(filename)
+            .then(small => {
+              return small
+                .resize(256, Jimp.AUTO)
+                .write(smallfilename);
+            })
+            .catch(err => {
+              console.error(err);
+            });
 
-          const avif = await sharp(file.path);
-          await avif.resize({ width: 600 })
-          await avif.avif();
-          await avif.toFile(avifsmallfilename);
+           await Jimp.read(filename)
+            .then(avif => {
+              return avif
+                .resize(512, Jimp.AUTO)
+                .write(avifsmallfilename);
+            })
+            .catch(err => {
+              console.error(err);
+            });
         } catch(err) {
           console.log(err)
         } finally {
