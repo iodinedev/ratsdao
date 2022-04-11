@@ -43,7 +43,7 @@ export async function download({
       file.on("finish", async () => {
         try {
           const avif = await sharp(file.path);
-          await avif.resize({ width: 512 })
+          await avif.resize({ width: 256 })
           await avif.avif({lossless: true})
           await avif.toFile(avifsmallfilename);
 
