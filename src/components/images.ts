@@ -36,16 +36,16 @@ export async function download({
 
       file.on("finish", async () => {
         try {
-          await sharp(file.path)
-            .resize({ width: 200 })
-            .withMetadata()
-            .toFile(smallfilename);
+          const small = await sharp(file.path);
+          await small.resize({ width: 200 })
+          await small.withMetadata()
+          await small.toFile(smallfilename);
 
-          await sharp(file.path)
-            .resize({ width: 600 })
-            .avif()
-            .withMetadata()
-            .toFile(avifsmallfilename);
+          const avif = await sharp(file.path);
+          await avif.resize({ width: 600 })
+          await avif.avif();
+          await avif.withMetadata()
+          await avif.toFile(avifsmallfilename);
         } catch(err) {
           console.log(err)
         } finally {
