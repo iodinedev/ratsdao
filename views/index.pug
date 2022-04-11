@@ -7,7 +7,7 @@ block content
     .background__wrapper
       .background
         - var rows = 8;
-        - var count = 15;
+        - var count = 12;
         - var current = 0;
         - var wrapper = false;
         while rows >= 0
@@ -17,22 +17,26 @@ block content
             while n < count
               .box
                 if (gallery && gallery[current])
-                  img(
-                    src="/img/nft/small_" + gallery[current].id,
-                    alt="",
-                    onerror="this.onerror=null;this.src='/img/examplenft.png';"
-                  )
+                  picture
+                    source(srcset="/img/nft/avif_small_" + gallery[current].id + ".avif")
+                    img(
+                      src="/img/nft/small_" + gallery[current].id,
+                      alt="",
+                      onerror="this.onerror=null;this.src='/img/examplenft.png';"
+                    )
               - current++;
               - n++;
             - current -= count;
             while n < count*2
               .box
                 if (gallery && gallery[current])
-                  img(
-                    src="/img/nft/small_" + gallery[current].id,
-                    alt="",
-                    onerror="this.onerror=null;this.src='/img/examplenft.png';"
-                  )
+                  picture
+                    source(srcset="/img/nft/avif_small_" + gallery[current].id + ".avif")
+                    img(
+                      src="/img/nft/small_" + gallery[current].id,
+                      alt="",
+                      onerror="this.onerror=null;this.src='/img/examplenft.png';"
+                    )
               - current++;
               - n++;
           - rows--;

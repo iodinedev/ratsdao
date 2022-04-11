@@ -91,7 +91,7 @@ export const updateDatabase = async () => {
       }
     }
   }
-
+  
   const updated = await database.addNfts(finalNfts);
 
   return {total: total, updated: updated, downloaded: downloaded};
