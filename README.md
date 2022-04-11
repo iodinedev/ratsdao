@@ -1,9 +1,9 @@
 # NPHA Site
 
-This is the source code for [nphvac.com](https://www.nphvac.com/).
+This is the source code for [ratsdao.io](https://ratsdao.io/).
 
 - **Language:** TypeScript
-- **Main libraries:** [koa](https://www.npmjs.com/package/koa), [pug](https://www.npmjs.com/package/handlebars)
+- **Main libraries:** [koa](https://www.npmjs.com/package/koa), [pug](https://www.npmjs.com/package/handlebars), [prisma](https://www.npmjs.com/package/prisma)
 - **Database:** PostgreSQL
 
 ## Running
@@ -11,7 +11,7 @@ This is the source code for [nphvac.com](https://www.nphvac.com/).
 - **External dependencies**
   - Install PostgreSQL.
 - **Installation**
-  - Install node v14 and yarn (`npm i -g yarn`)
+  - Install node v16 and yarn (`npm i -g yarn`)
   - Install dependencies using `yarn`
   - Build using `yarn build`
 - **Configuration**
@@ -20,4 +20,5 @@ This is the source code for [nphvac.com](https://www.nphvac.com/).
   - **In development only:**
     - Run using  `yarn watch`
   - **In production only:**
-    - Run using `yarn start`
+    - Install PM2 `npm i -g pm2`
+    - Run using `pm2 start`

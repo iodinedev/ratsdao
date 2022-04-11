@@ -7,7 +7,6 @@ import * as Boom from "@hapi/boom";
 import path from "path";
 import { captureException, PublicError } from "./sentry";
 import { renderView } from "./views";
-import { ConfigurationServicePlaceholders } from "aws-sdk/lib/config_service_placeholders";
 import compress from "koa-compress";
 
 // Useless

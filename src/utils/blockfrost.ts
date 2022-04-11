@@ -1,6 +1,4 @@
-import { ConfigurationServicePlaceholders } from "aws-sdk/lib/config_service_placeholders";
 import axios from "axios";
-import path from "path";
 import { stakeAddress } from "./bech";
 
 const baseUrl = "https://cardano-mainnet.blockfrost.io/api/v0";
