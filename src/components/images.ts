@@ -25,6 +25,12 @@ export async function download({
       fs.mkdirSync(dir);
     }
 
+    const check_filename = path.join(dir, `${name}`);
+    const check_smallfilename = path.join(dir, `small_${name}`);
+    const check_avifsmallfilename = path.join(dir, `avif_small_${name}.avif`);
+
+    if (await checkFileExists(check_filename) && await checkFileExists(check_smallfilename) && await checkFileExists(check_avifsmallfilename)) return false;
+
     http.get(url, async (response) => {
       const filename = path.join(dir, `${name}`);
       const smallfilename = path.join(dir, `small_${name}`);
