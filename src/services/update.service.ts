@@ -1,4 +1,4 @@
-import { download, deleteFile } from "../components/images";
+import { download, deleteFile, checkValid } from "../components/images";
 import { blockfrost } from "../utils/blockfrost";
 import { database } from "../utils/database";
 
@@ -47,7 +47,7 @@ export const updateDatabase = async () => {
 
   if (currentNfts) {
     for await (const nft of assets) {
-      if (!nft.id || nft.status_code == 404) {
+      if (!nft.id || nft.status_code == 404 || !checkValid(nft.id)) {
         await deleteFile(nft.id);
         await database.removeNft(nft.id);
       }

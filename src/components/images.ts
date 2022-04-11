@@ -71,6 +71,24 @@ export async function download({
   }
 }
 
+export async function checkValid(name: string): Promise<boolean> {
+  const dir = path.join(process.env.PWD!, "static/img/nft");
+
+  const link = path.join(dir, `${name}`);
+  const smalllink = path.join(dir, `small_${name}`);
+  const aviflink = path.join(dir, `avif_small_${name}.avif`);
+
+  const image = sharp(link);
+  const smallimage = sharp(smalllink);
+  const avifimage = sharp(aviflink);
+
+  console.log(image.stats());
+  console.log(smallimage.stats());
+  console.log(avifimage.stats());
+
+  return true;
+}
+
 export async function deleteFile(name: number | string): Promise<boolean> {
   try {
     const dir = path.join(process.env.PWD!, "static/img/nft");
