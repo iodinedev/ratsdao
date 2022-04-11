@@ -77,7 +77,7 @@ export const updateDatabase = async () => {
           // Tiny delay to minimize ratelimits
           setTimeout(async () => {
             download({url: image, name: id});
-          }, 500);
+          }, 1000);
         } catch(err) {
           console.log(`Error downloading file from ${image}: ${err}`);
         }

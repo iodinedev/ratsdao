@@ -1,7 +1,7 @@
 import http from "https";
 import fs from "fs";
 import { URL } from "url";
-import Jimp from "jimp";
+import sharp from "sharp";
 import path from "path";
 
 function checkFileExists(file) {
@@ -13,7 +13,7 @@ function checkFileExists(file) {
 
 export async function download({
   url,
-  name
+  name,
 }: {
   url: string | http.RequestOptions | URL;
   name: string;
@@ -36,39 +36,29 @@ export async function download({
 
       file.on("finish", async () => {
         try {
-          await Jimp.read(filename)
-            .then(small => {
-              return small
-                .resize(256, Jimp.AUTO)
-                .write(smallfilename);
-            })
-            .catch(err => {
-              console.error(err);
-            });
+          const avif = await sharp(file.path);
+          await avif.resize({ width: 512 })
+          await avif.avif()
+          await avif.withMetadata()
+          await avif.toFile(avifsmallfilename);
 
-           await Jimp.read(filename)
-            .then(avif => {
-              return avif
-                .resize(512, Jimp.AUTO)
-                .write(avifsmallfilename);
-            })
-            .catch(err => {
-              console.error(err);
-            });
+          const small = await sharp(file.path)
+          await small.resize({ width: 256 })
+          await small.withMetadata()
+          await small.toFile(smallfilename);
         } catch(err) {
-          console.log(err)
+          console.log(`${url} had an error!`)
+          console.log(err);
         } finally {
           file.close();
         }
-      });
-    }).on('error', async (e) => {
+      })
+    }).on("error", (e) => {
       if (!error) {
-        // If there's an error it's very likely we're being ratelimited. Try again in thirty seconds.
-        setTimeout(async () => {
-          download({url: url, name: name}, true)
-        }, 30000);
+        setTimeout(async () => { await download({url: url, name: name}, true) }, 5 * 60 * 1000);
       } else {
-        console.log(e);
+        console.log(`${url} had an error!`)
+        console.error(e);
       }
     });
 
