@@ -44,16 +44,13 @@ export async function download({
         try {
           const avif = await sharp(file.path);
           await avif.resize({ width: 512 })
-          await avif.avif()
-          await avif.withMetadata()
+          await avif.avif({lossless: true})
           await avif.toFile(avifsmallfilename);
 
           const small = await sharp(file.path)
           await small.resize({ width: 256 })
-          await small.withMetadata()
           await small.toFile(smallfilename);
         } catch(err) {
-          console.log(`${url} had an error!`)
           console.log(err);
         } finally {
           file.close();

@@ -72,8 +72,6 @@ export const updateDatabase = async () => {
 
       if (projectId) {
         try {
-          console.log(`Downloading ${name}`)
-          // Tiny delay to minimize ratelimits
           await download({url: image, name: id});
 
           downloaded++;
