@@ -16,8 +16,6 @@ export const updateDatabase = async () => {
   var downloaded = 0;
   var total = 0;
 
-  await database.drop();
-
   while (returned == 100) {
     const rawNfts = await blockfrost.getAllAssets(page);
     if (rawNfts && rawNfts.status_code && rawNfts.status_code === 402)
@@ -77,7 +75,7 @@ export const updateDatabase = async () => {
           // Tiny delay to minimize ratelimits
           setTimeout(async () => {
             download({url: image, name: id});
-          }, 1000);
+          }, 500);
         } catch(err) {
           console.log(`Error downloading file from ${image}: ${err}`);
         }

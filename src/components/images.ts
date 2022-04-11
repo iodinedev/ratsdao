@@ -17,7 +17,7 @@ export async function download({
 }: {
   url: string | http.RequestOptions | URL;
   name: string;
-}, error?: boolean): Promise<boolean> {
+}): Promise<boolean> {
   try {
     const dir = path.join(process.env.PWD!, "static/img/nft");
 
@@ -60,12 +60,7 @@ export async function download({
         }
       })
     }).on("error", (e) => {
-      if (!error) {
-        setTimeout(async () => { await download({url: url, name: name}, true) }, 5 * 60 * 1000);
-      } else {
-        console.log(`${url} had an error!`)
-        console.error(e);
-      }
+      console.error(e);
     });
 
     return true;
