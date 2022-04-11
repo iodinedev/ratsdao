@@ -1,13 +1,3 @@
-#noscript {
-  display: block!important;
-  position: relative;
-  top: 100px;
-  width: 90%;
-  color: black;
-  padding: 30px;
-  border-radius: 5px;
-  background-color: white;
-  z-index: 10000;
-  border: solid 3px black;
-  margin: 0 auto 30px;
+[data-aos^=fade][data-aos^=fade] {
+  opacity: 1!important;
 }

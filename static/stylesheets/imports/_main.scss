@@ -660,6 +660,10 @@ $gap: 25px;
       width: $base-sizing*4;
       justify-content: space-between;
       padding: math.div($base-sizing, 2);
+
+      img {
+        object-fit: contain;
+      }
     }
   }
 }
