@@ -56,6 +56,10 @@ export const updateDatabase = async () => {
 
   await database.createProjects(projects);
 
+  console.log(projects)
+
+  console.log(assets.length)
+
   for await (const nft of assets) {
     if (nft.asset && nft.onchain_metadata && nft.quantity) {
       const id: string = nft.asset;
@@ -72,10 +76,13 @@ export const updateDatabase = async () => {
 
       if (projectId) {
         try {
+          console.log(`Downloading ${image}`)
           // Tiny delay to minimize ratelimits
           setTimeout(async () => {
             download({url: image, name: id});
           }, 500);
+
+          downloaded++;
         } catch(err) {
           console.log(`Error downloading file from ${image}: ${err}`);
         }
