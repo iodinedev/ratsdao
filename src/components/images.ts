@@ -84,19 +84,28 @@ export async function deleteFile(name: number | string): Promise<boolean> {
       return false;
     }
 
-    const filename = path.join(dir, `${name}.png`);
-    const smallfilename = path.join(dir, `${name}.s.png`);
 
-    if (!(await checkFileExists(filename))) return false;
-    if (!(await checkFileExists(smallfilename))) return false;
+    const filename = path.join(dir, `${name}`);
+    const smallfilename = path.join(dir, `small_${name}`);
+    const avifsmallfilename = path.join(dir, `avif_small_${name}.avif`);
 
-    fs.unlink(filename, function (err) {
-      if (err) return console.error(err);
-    });
+    if (await checkFileExists(filename)) {
+      fs.unlink(filename, function (err) {
+        if (err) return console.error(err);
+      });
+    }
 
-    fs.unlink(smallfilename, function (err) {
-      if (err) return console.error(err);
-    });
+    if (await checkFileExists(smallfilename)) {
+      fs.unlink(smallfilename, function (err) {
+        if (err) return console.error(err);
+      });
+    }
+
+    if (await checkFileExists(avifsmallfilename)) {
+      fs.unlink(avifsmallfilename, function (err) {
+        if (err) return console.error(err);
+      });
+    }
 
     return true;
   } catch (err) {
