@@ -16,6 +16,8 @@ export const updateDatabase = async () => {
   var downloaded = 0;
   var total = 0;
 
+  await database.drop();
+
   while (returned == 100) {
     const rawNfts = await blockfrost.getAllAssets(page);
     if (rawNfts && rawNfts.status_code && rawNfts.status_code === 402)
@@ -29,19 +31,6 @@ export const updateDatabase = async () => {
 
   total = nfts.length;
 
-  const currentNfts = await database.getAllNfts();
-
-  if (currentNfts) {
-    for await (const nft of currentNfts) {
-      const rawNft = await blockfrost.getAsset(nft.id);
-
-      if (!rawNft || rawNft.status_code == 404) {
-        await deleteFile(nft.id);
-        await database.removeNft(nft.id);
-      }
-    }
-  }
-
   for await (const rawNft of nfts) {
     const nft = await blockfrost.getAsset(rawNft.unit);
 
@@ -53,6 +42,17 @@ export const updateDatabase = async () => {
       if (!projects[nft.policy_id]) projects[nft.policy_id] = [];
 
       projects[nft.policy_id].push(name);
+    }
+  }
+  
+  const currentNfts = await database.getAllNfts();
+
+  if (currentNfts) {
+    for await (const nft of assets) {
+      if (!nft.id || nft.status_code == 404) {
+        await deleteFile(nft.id);
+        await database.removeNft(nft.id);
+      }
     }
   }
 
@@ -73,7 +73,14 @@ export const updateDatabase = async () => {
       var projectId = await database.getProjectId(nft.policy_id);
 
       if (projectId) {
-        if (await download({ url: image, name: id })) downloaded++;
+        try {
+          // Tiny delay to minimize ratelimits
+          setTimeout(async () => {
+            download({url: image, name: id});
+          }, 500);
+        } catch(err) {
+          console.log(`Error downloading file from ${image}: ${err}`);
+        }
 
         finalNfts.push({
           id: id,
@@ -89,7 +96,5 @@ export const updateDatabase = async () => {
 
   const updated = await database.addNfts(finalNfts);
 
-  console.log(
-    `Database refreshed. Scraped ${total} assets from the blockchain. Updated ${updated} in local database. Successfully downloaded ${downloaded} images.`
-  );
+  return {total: total, updated: updated, downloaded: downloaded};
 };

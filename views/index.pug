@@ -17,7 +17,6 @@ block content
             while n < count
               .box
                 if (gallery && gallery[current])
-                  - wrapper = true;
                   img(
                     src="/img/nft/small_" + gallery[current].id,
                     alt="",
@@ -29,7 +28,6 @@ block content
             while n < count*2
               .box
                 if (gallery && gallery[current])
-                  - wrapper = true;
                   img(
                     src="/img/nft/small_" + gallery[current].id,
                     alt="",
@@ -38,8 +36,7 @@ block content
               - current++;
               - n++;
           - rows--;
-    if (wrapper)
-      .hero-cover
+    .hero-cover
     .hero__content
       h1(data-aos="fade-in", data-aos-duration="800") RatsDAO
       h3(data-aos="fade-in", data-aos-delay="600", data-aos-duration="800") Blue chip CNFTs at your disposal
@@ -52,7 +49,7 @@ block content
 
   .section
     .section__text.welcome__spacer
-      .welcome__video
+      //.welcome__video
         iframe(
           src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
           frameborder="0",
@@ -62,8 +59,9 @@ block content
       .welcome
         img.icon(src="/img/ratsdao.png")
         h2 Welcome to RatsDAO
-        p We made a video to help you get a quick introduction to our community; it covers who we are and what we hope to achieve.
-        p.vr Give it a watch — we promise it's short.
+        //p We made a video to help you get a quick introduction to our community; it covers who we are and what we hope to achieve.
+        //p.vr Give it a watch — we promise it's short.
+        p A well-established DAO built on the Cardano network offering unrivaled benefits to members and the world around us. 
 
     .section__text
       h2 Our Partners

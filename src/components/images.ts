@@ -13,11 +13,11 @@ function checkFileExists(file) {
 
 export async function download({
   url,
-  name,
+  name
 }: {
   url: string | http.RequestOptions | URL;
   name: string;
-}): Promise<boolean> {
+}, error?: boolean): Promise<boolean> {
   try {
     const dir = path.join(process.env.PWD!, "static/img/nft");
 
@@ -35,20 +35,32 @@ export async function download({
       response.pipe(file);
 
       file.on("finish", async () => {
-        await sharp(file.path)
-          .resize({ width: 600 })
-          .avif()
-          .withMetadata()
-          .toFile(avifsmallfilename);
+        try {
+          await sharp(file.path)
+            .resize({ width: 200 })
+            .withMetadata()
+            .toFile(smallfilename);
 
-        await sharp(file.path)
-          .resize({ width: 150 })
-          .avif()
-          .withMetadata()
-          .toFile(smallfilename);
-
-        file.close();
+          await sharp(file.path)
+            .resize({ width: 600 })
+            .avif()
+            .withMetadata()
+            .toFile(avifsmallfilename);
+        } catch(err) {
+          console.log(err)
+        } finally {
+          file.close();
+        }
       });
+    }).on('error', async (e) => {
+      if (!error) {
+        // If there's an error it's very likely we're being ratelimited. Try again in thirty seconds.
+        setTimeout(async () => {
+          download({url: url, name: name}, true)
+        }, 30000);
+      } else {
+        console.log(e);
+      }
     });
 
     return true;
