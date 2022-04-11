@@ -63,9 +63,9 @@ export const updateDatabase = async () => {
       const id: string = nft.asset;
       const name: string = nft.onchain_metadata.name;
       const imagePath = nft.onchain_metadata.image.split("/");
-      const image: string = `https://ipfs.io/ipfs/${
+      const image: string = `${
         imagePath[imagePath.length - 1]
-      }`;
+      }.ipfs.infura-ipfs.io`;
       const tags: string[] = nft.onchain_metadata.tags;
       const quantity: number = isNaN(parseInt(nft.quantity))
         ? 0
