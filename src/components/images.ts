@@ -82,9 +82,13 @@ export async function checkValid(name: string): Promise<boolean> {
   const smallimage = sharp(smalllink);
   const avifimage = sharp(aviflink);
 
-  console.log(image.stats());
-  console.log(smallimage.stats());
-  console.log(avifimage.stats());
+  try {
+    image.stats();
+    smallimage.stats();
+    avifimage.stats();
+  } catch(err) {
+    return false;
+  }
 
   return true;
 }
