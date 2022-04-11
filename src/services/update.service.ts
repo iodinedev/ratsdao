@@ -73,6 +73,7 @@ export const updateDatabase = async () => {
       if (projectId) {
         try {
           await download({url: image, name: id});
+          console.log(`Downloaded ${name}`)
 
           downloaded++;
         } catch(err) {
