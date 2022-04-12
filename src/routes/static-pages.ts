@@ -195,4 +195,8 @@ export function init() {
   router.get("/humans.txt", async (ctx) => {
     ctx.body = "Made by Zachary Montgomery for RatsDAO.";
   });
+
+  router.get("/c9a9.txt", async (ctx) => {
+    ctx.body = "";
+  })
 }
