@@ -16,7 +16,7 @@ block content
       each nft in gallery
         a.card(href="/nft/" + nft.id + "?p=" + current)
           picture
-            source(srcset="/img/nft/avif_small_" + nft.id + ".avif")
+            source(srcset="/img/nft/avif_small_" + nft.id + ".avif" type="image/avif")
             img(src="/img/nft/small_" + nft.id, alt="")
           h3= nft.name
     if pagination.length > 1

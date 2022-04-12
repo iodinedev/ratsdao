@@ -13,17 +13,17 @@ block content
             .project__image
               if project.nfts[0]
                 picture
-                  source(srcset="/img/nft/avif_small_" + project.nfts[0].id + ".avif")
+                  source(srcset="/img/nft/avif_small_" + project.nfts[0].id + ".avif" type="image/avif")
                   img(src="/img/nft/small_" + project.nfts[0].id, alt="")
             .project__image
               if project.nfts[1]
                 picture
-                  source(srcset="/img/nft/avif_small_" + project.nfts[1].id + ".avif")
+                  source(srcset="/img/nft/avif_small_" + project.nfts[1].id + ".avif" type="image/avif")
                   img(src="/img/nft/small_" + project.nfts[1].id, alt="")
             .project__image
               if project.nfts[2]
                 picture
-                  source(srcset="/img/nft/avif_small_" + project.nfts[2].id + ".avif")
+                  source(srcset="/img/nft/avif_small_" + project.nfts[2].id + ".avif" type="image/avif")
                   img(src="/img/nft/small_" + project.nfts[2].id, alt="")
           div
             h3= project.name
