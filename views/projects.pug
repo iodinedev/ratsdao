@@ -8,27 +8,28 @@ block content
 
     .cards
       each project in projects
-        a.card.card__project(href="/gallery/" + project.id)
-          .project__images
-            .project__image
-              if project.nfts[0]
-                picture
-                  source(srcset="/img/nft/avif_small_" + project.nfts[0].id + ".avif" type="image/avif")
-                  img(src="/img/nft/small_" + project.nfts[0].id, alt="")
-            .project__image
-              if project.nfts[1]
-                picture
-                  source(srcset="/img/nft/avif_small_" + project.nfts[1].id + ".avif" type="image/avif")
-                  img(src="/img/nft/small_" + project.nfts[1].id, alt="")
-            .project__image
-              if project.nfts[2]
-                picture
-                  source(srcset="/img/nft/avif_small_" + project.nfts[2].id + ".avif" type="image/avif")
-                  img(src="/img/nft/small_" + project.nfts[2].id, alt="")
-          div
-            h3= project.name
-              | &#32;
-              | Collection
-            p View All (
-              = project.nfts.length
-              | )
+        if (project && project.nfts && project.nfts.length && project.nfts.length > 0)
+          a.card.card__project(href="/gallery/" + project.id)
+            .project__images
+              .project__image
+                if project.nfts[0]
+                  picture
+                    source(srcset="/img/nft/avif_small_" + project.nfts[0].id + ".avif" type="image/avif")
+                    img(src="/img/nft/small_" + project.nfts[0].id, alt="")
+              .project__image
+                if project.nfts[1]
+                  picture
+                    source(srcset="/img/nft/avif_small_" + project.nfts[1].id + ".avif" type="image/avif")
+                    img(src="/img/nft/small_" + project.nfts[1].id, alt="")
+              .project__image
+                if project.nfts[2]
+                  picture
+                    source(srcset="/img/nft/avif_small_" + project.nfts[2].id + ".avif" type="image/avif")
+                    img(src="/img/nft/small_" + project.nfts[2].id, alt="")
+            div
+              h3= project.name
+                | &#32;
+                | Collection
+              p View All (
+                = project.nfts.length
+                | )
