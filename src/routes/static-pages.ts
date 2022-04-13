@@ -84,7 +84,7 @@ export function init() {
     if (project == -1 || (gallery && gallery.length === 0))
       return ctx.redirect("/projects");
 
-    const max = Math.min(6, Math.floor(count / 24));
+    const max = Math.min(6, Math.ceil(count / 24));
     var constructionPage = Math.max(Math.min(max - 3, page), 3);
     const pagination: any[] = [
       0,
@@ -131,7 +131,7 @@ export function init() {
     if (project == -1 || (gallery && gallery.length === 0))
       return ctx.redirect("/projects");
 
-    const max = Math.min(6, Math.floor(count / 24));
+    const max = Math.min(6, Math.ceil(count / 24));
     var constructionPage = Math.max(Math.min(max - 3, page), 3);
     const pagination: any[] = [
       0,
