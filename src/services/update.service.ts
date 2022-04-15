@@ -58,7 +58,6 @@ export const updateDatabase = async () => {
 
   for await (const nft of assets) {
     if (nft.asset && nft.onchain_metadata && nft.onchain_metadata.image && nft.quantity) {
-      console.log(nft)
       const id: string = nft.asset;
       const name: string = nft.onchain_metadata.name;
       const imagePath = nft.onchain_metadata.image.split("/");
