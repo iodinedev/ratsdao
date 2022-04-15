@@ -4,6 +4,7 @@ interface Nft {
   tags: string[],
   quantity: number,
   projectsId: number,
+  fingerprint: string,
   url: string
 }
 

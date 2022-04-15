@@ -9,13 +9,14 @@ datasource db {
 }
 
 model Nfts {
-  id         String   @id
-  name       String
-  tags       String[]
-  quantity   Int
-  project    Projects @relation(fields: [projectsId], references: [id])
-  projectsId Int
-  url        String
+  id          String   @id
+  name        String
+  tags        String[]
+  quantity    Int
+  project     Projects @relation(fields: [projectsId], references: [id])
+  projectsId  Int
+  fingerprint String
+  url         String
 }
 
 model Projects {

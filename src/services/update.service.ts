@@ -58,12 +58,14 @@ export const updateDatabase = async () => {
 
   for await (const nft of assets) {
     if (nft.asset && nft.onchain_metadata && nft.onchain_metadata.image && nft.quantity) {
+      console.log(nft)
       const id: string = nft.asset;
       const name: string = nft.onchain_metadata.name;
       const imagePath = nft.onchain_metadata.image.split("/");
       const image: string = `https://infura-ipfs.io/ipfs/${
         imagePath[imagePath.length - 1]
       }`;
+      const fingerprint = nft.fingerprint;
       const tags: string[] = nft.onchain_metadata.tags;
       const quantity: number = isNaN(parseInt(nft.quantity))
         ? 0
@@ -85,6 +87,7 @@ export const updateDatabase = async () => {
           tags: tags,
           quantity: quantity,
           projectsId: projectId,
+          fingerprint: fingerprint,
           url: image,
         });
       }
