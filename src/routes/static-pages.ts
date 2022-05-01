@@ -1,57 +1,13 @@
 import { router } from "../components/router";
 import { database } from "../utils/database";
-
-function shuffle(array) {
-  let currentIndex = array.length,
-    randomIndex;
-
-  // While there remain elements to shuffle...
-  while (currentIndex != 0) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-
-  return array;
-}
+import { getGallery } from "../state"
 
 export function init() {
   router.get("/", async (ctx) => {
-    // Number of boxes per row in hero animation
-    const countInRow = 28;
-    // Number of rows in hero animation
-    const rows = 9;
-
-    const total = countInRow * rows;
-
-    var gallery = await database.pickRandom(total);
-
-    if (!gallery) {
-      gallery = new Array(total);
-    }
-
-    if (gallery.length < total) {
-      var i = gallery.length;
-      var curr = 0;
-
-      while (i < total) {
-        gallery.push(gallery[curr]);
-
-        curr++;
-        i++;
-      }
-    }
-
     ctx.render("index.pug", {
       title: "Home | RatsDAO",
       heroClass: true,
-      gallery: shuffle(gallery),
+      gallery: await getGallery(),
     });
   });
 

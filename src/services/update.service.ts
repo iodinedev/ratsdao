@@ -1,6 +1,7 @@
 import { download, deleteFile, checkValid } from "../components/images";
 import { blockfrost } from "../utils/blockfrost";
 import { database } from "../utils/database";
+import { updateGallery } from "../state";
 
 export const updateDatabase = async () => {
   var finalNfts: Nft[] = [];
@@ -94,6 +95,8 @@ export const updateDatabase = async () => {
   }
   
   const updated = await database.addNfts(finalNfts);
+
+  await updateGallery();
 
   return {total: total, updated: updated, downloaded: downloaded};
 };
