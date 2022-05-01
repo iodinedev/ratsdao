@@ -57,8 +57,7 @@ async function generateHtml(gallery): Promise<string> {
       if (gallery && gallery[current]) {
         final.push("<picture>");
         final.push(`<source srcset="/img/nft/avif_small_${gallery[current].id}.avif", type="image/avif">`);
-        final.push(`<img src="/img/nft/small_${gallery[current].id}", alt="">`);
-          // onerror="this.onerror=null;this.src='/img/examplenft.png';"
+        final.push(`<img src="/img/nft/small_${gallery[current].id}", alt="", onerror="this.onerror=null;this.src='/img/examplenft.png';">`);
         final.push("</picture>");
       }
       // End .box
@@ -75,8 +74,7 @@ async function generateHtml(gallery): Promise<string> {
       if (gallery && gallery[current]) {
         final.push("<picture>");
         final.push(`<source srcset="/img/nft/avif_small_${gallery[current].id}.avif", type="image/avif">`);
-        final.push(`<img src="/img/nft/small_${gallery[current].id}", alt="">`);
-          // onerror="this.onerror=null;this.src='/img/examplenft.png';"
+        final.push(`<img src="/img/nft/small_${gallery[current].id}", alt="", onerror="this.onerror=null;this.src='/img/examplenft.png';">`);
         final.push("</picture>");
       }
       // End .box
