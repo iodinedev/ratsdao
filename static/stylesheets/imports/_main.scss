@@ -916,7 +916,7 @@ $gap: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 50vw;
+  width: 40vw;
   right: 0;
   background-color: white;
   color: black;
@@ -945,9 +945,8 @@ $gap: 25px;
     position: absolute;
     left: 10vw;
 
-    iframe {
+    video {
       width: 40vw;
-      height: 22vw;
       border-radius: $border-radius;
     }
   }
@@ -1106,9 +1105,8 @@ $gap: 25px;
       left: unset;
       margin-top: $base-sizing;
 
-      iframe {
+      video {
         width: 80vw;
-        height: 45vw;
       }
     }
   }

@@ -19,19 +19,19 @@ block content
 
   .section
     .section__text.welcome__spacer
-      //.welcome__video
-        iframe(
-          src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
+      .welcome__video
+        video(
+          controls
           frameborder="0",
           allow="autoplay; encrypted-media",
           allowfullscreen
         )
+          source(src="/img/Rats_logo_intro_11.mp4")
       .welcome
         img.icon(src="/img/ratsdao.png")
         h2 Welcome to RatsDAO
-        //p We made a video to help you get a quick introduction to our community; it covers who we are and what we hope to achieve.
-        //p.vr Give it a watch — we promise it's short.
-        p A well-established DAO built on the Cardano network offering unrivaled benefits to members and the world around us. 
+        p We made a video to help you get a quick introduction to our community; it covers who we are and what we hope to achieve.
+        p.vr Give it a watch — we promise it's short.
 
     .section__text
       h2 Our Partners
