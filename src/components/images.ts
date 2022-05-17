@@ -29,36 +29,43 @@ export async function download({
     const check_smallfilename = path.join(dir, `small_${name}`);
     const check_avifsmallfilename = path.join(dir, `avif_small_${name}.avif`);
 
-    if (await checkFileExists(check_filename) && await checkFileExists(check_smallfilename) && await checkFileExists(check_avifsmallfilename)) return false;
+    if (
+      (await checkFileExists(check_filename)) &&
+      (await checkFileExists(check_smallfilename)) &&
+      (await checkFileExists(check_avifsmallfilename))
+    )
+      return false;
 
-    http.get(url, async (response) => {
-      const filename = path.join(dir, `${name}`);
-      const smallfilename = path.join(dir, `small_${name}`);
-      const avifsmallfilename = path.join(dir, `avif_small_${name}.avif`);
+    http
+      .get(url, async (response) => {
+        const filename = path.join(dir, `${name}`);
+        const smallfilename = path.join(dir, `small_${name}`);
+        const avifsmallfilename = path.join(dir, `avif_small_${name}.avif`);
 
-      var file = fs.createWriteStream(filename);
+        var file = fs.createWriteStream(filename);
 
-      response.pipe(file);
+        response.pipe(file);
 
-      file.on("finish", async () => {
-        try {
-          const avif = await sharp(file.path);
-          await avif.resize({ width: 256 })
-          await avif.avif({lossless: true})
-          await avif.toFile(avifsmallfilename);
+        file.on("finish", async () => {
+          try {
+            const avif = await sharp(file.path);
+            await avif.resize({ width: 256 });
+            await avif.avif({ lossless: true });
+            await avif.toFile(avifsmallfilename);
 
-          const small = await sharp(file.path)
-          await small.resize({ width: 256 })
-          await small.toFile(smallfilename);
-        } catch(err) {
-          console.log(err);
-        } finally {
-          file.close();
-        }
+            const small = await sharp(file.path);
+            await small.resize({ width: 256 });
+            await small.toFile(smallfilename);
+          } catch (err) {
+            console.log(err);
+          } finally {
+            file.close();
+          }
+        });
       })
-    }).on("error", (e) => {
-      console.error(e);
-    });
+      .on("error", (e) => {
+        console.error(e);
+      });
 
     return true;
   } catch (err) {
@@ -83,7 +90,7 @@ export async function checkValid(name: string): Promise<boolean> {
     image.stats();
     smallimage.stats();
     avifimage.stats();
-  } catch(err) {
+  } catch (err) {
     return false;
   }
 
@@ -97,7 +104,6 @@ export async function deleteFile(name: number | string): Promise<boolean> {
     if (!fs.existsSync(dir)) {
       return false;
     }
-
 
     const filename = path.join(dir, `${name}`);
     const smallfilename = path.join(dir, `small_${name}`);

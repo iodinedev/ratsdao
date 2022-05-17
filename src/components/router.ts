@@ -24,15 +24,17 @@ export const router = new KoaRouter<KoaState, KoaContext>({
 });
 
 koa.use(csp());
- 
-koa.use(csp({
-  enableWarn: true,
-  policy: {
-    'img-src': ["'self'", "data:"],
-    'script-src': ["'self'", "unpkg.com"],
-    styleSrc: ["'self'", "fonts.googleapis.com", "unpkg.com"],
-  },
-}));
+
+koa.use(
+  csp({
+    enableWarn: true,
+    policy: {
+      "img-src": ["'self'", "data:"],
+      "script-src": ["'self'", "unpkg.com"],
+      styleSrc: ["'self'", "fonts.googleapis.com", "unpkg.com"],
+    },
+  })
+);
 
 koa.use(compress());
 koa.use(

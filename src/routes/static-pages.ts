@@ -1,6 +1,6 @@
 import { router } from "../components/router";
 import { database } from "../utils/database";
-import { getGallery } from "../state"
+import { getGallery } from "../state";
 
 export function init() {
   router.get("/", async (ctx) => {
@@ -154,9 +154,9 @@ export function init() {
 
   router.get("/robots.txt", async (ctx) => {
     ctx.body = "User-agent: *\nAllow: /";
-  })
+  });
 
   router.get("/c9a9.txt", async (ctx) => {
     ctx.body = "";
-  })
+  });
 }

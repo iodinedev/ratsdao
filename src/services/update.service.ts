@@ -43,7 +43,7 @@ export const updateDatabase = async () => {
       projects[nft.policy_id].push(name);
     }
   }
-  
+
   const currentNfts = await database.getAllNfts();
 
   if (currentNfts) {
@@ -58,7 +58,12 @@ export const updateDatabase = async () => {
   await database.createProjects(projects);
 
   for await (const nft of assets) {
-    if (nft.asset && nft.onchain_metadata && nft.onchain_metadata.image && nft.quantity) {
+    if (
+      nft.asset &&
+      nft.onchain_metadata &&
+      nft.onchain_metadata.image &&
+      nft.quantity
+    ) {
       const id: string = nft.asset;
       const name: string = nft.onchain_metadata.name;
       const imagePath = nft.onchain_metadata.image.split("/");
@@ -74,10 +79,10 @@ export const updateDatabase = async () => {
 
       if (projectId) {
         try {
-          await download({url: image, name: id});
+          await download({ url: image, name: id });
 
           downloaded++;
-        } catch(err) {
+        } catch (err) {
           console.log(err);
         }
 
@@ -93,10 +98,10 @@ export const updateDatabase = async () => {
       }
     }
   }
-  
+
   const updated = await database.addNfts(finalNfts);
 
   await updateGallery();
 
-  return {total: total, updated: updated, downloaded: downloaded};
+  return { total: total, updated: updated, downloaded: downloaded };
 };
