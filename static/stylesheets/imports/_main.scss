@@ -243,6 +243,26 @@ a.back {
   }
 }
 
+.index {
+  .header {
+    .toggle {
+      fill: white
+    }
+
+    ul {
+      li {
+        a {
+          color: white;
+
+          &:after {
+            background: white;
+          }
+        }
+      }
+    }
+  }
+}
+
 
 @keyframes offset {
   to { stroke-dashoffset: 0; }
@@ -981,7 +1001,7 @@ $gap: 25px;
       left: 10vw;
       z-index: 10;
       gap: math.div($base-sizing, 3);
-      fill: white;
+      fill: var(--text-color);
       transition: $transition-time*2;
 
       svg {
@@ -1018,6 +1038,8 @@ $gap: 25px;
 
         li {
           a {
+            color: var(--text-color);
+            
             &:before, &:after {
               background: var(--text-color);
             }
