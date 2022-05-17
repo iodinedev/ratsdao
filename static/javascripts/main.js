@@ -1,3 +1,5 @@
+"use strict";
+
 const main = document.getElementById("main");
 
 if (main) {
@@ -11,3 +13,9 @@ if (main) {
     }
   }
 }
+
+document.body.onload = setTimeout(function() {
+  document.body.className="";
+} ,800);
+
+AOS.init();

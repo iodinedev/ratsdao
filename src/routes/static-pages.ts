@@ -152,6 +152,10 @@ export function init() {
     ctx.body = "Made by Zachary Montgomery for RatsDAO.";
   });
 
+  router.get("/robots.txt", async (ctx) => {
+    ctx.body = "User-agent: *\nAllow: /";
+  })
+
   router.get("/c9a9.txt", async (ctx) => {
     ctx.body = "";
   })

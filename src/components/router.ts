@@ -8,6 +8,7 @@ import path from "path";
 import { captureException, PublicError } from "./sentry";
 import { renderView } from "./views";
 import compress from "koa-compress";
+import csp from "koa-csp";
 
 // Useless
 export interface KoaState extends Koa.DefaultState {}
@@ -21,6 +22,17 @@ export const koa = new Koa<KoaState, KoaContext>();
 export const router = new KoaRouter<KoaState, KoaContext>({
   prefix: process.env.HTTP_URL_PREFIX,
 });
+
+koa.use(csp());
+ 
+koa.use(csp({
+  enableWarn: true,
+  policy: {
+    'img-src': ["'self'", "data:"],
+    'script-src': ["'self'", "unpkg.com"],
+    styleSrc: ["'self'", "fonts.googleapis.com", "unpkg.com"],
+  },
+}));
 
 koa.use(compress());
 koa.use(

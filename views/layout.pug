@@ -57,24 +57,10 @@ html(lang="en-us")
     // Viewport relativity
     meta(
       name="viewport",
-      content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1"
     )
-    script.
-      var viewportmeta = document.querySelector('meta[name="viewport"]');
-      if (viewportmeta) {
-        if (screen.width < 375) {
-          var newScale = screen.width / 375;
-          viewportmeta.content = "width=375, minimum-scale=" + newScale + ", maximum-scale=1.0, user-scalable=no, initial-scale=" + newScale + "";
-        } else {
-          viewportmeta.content = "width=device-width, maximum-scale=1.0, initial-scale=1.0";
-        }
-      }
-  body.preload(
-    onload="setTimeout(function(){document.body.className=\"\";},800);"
-  )
-    #primary_content(
-      style="display: flex; flex-direction: column; justify-content: space-between; min-height: 100vh"
-    )
+  body.preload
+    #primary_content.primary_content
       .content
         block content
 
@@ -83,5 +69,3 @@ html(lang="en-us")
     // Scripts
     script(src="https://unpkg.com/aos@2.3.1/dist/aos.js")
     script(src="/javascripts/main.js", defer)
-    script.
-      AOS.init();

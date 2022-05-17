@@ -127,6 +127,7 @@ h6 {
 h1, h2, h3, h4, h5, h6 {
   font-weight: $base-font-weight;
   font-family: "Fredoka One", sans-serif;
+  color: var(--header-color);
 
   &.subheader {
     text-transform:uppercase;
@@ -139,7 +140,7 @@ h1, h2, h3, h4, h5, h6 {
  */
 
 a {
-  color: white;
+  color: var(--text-color);
   text-underline-offset: 3px;
   transition: math.div($transition-time, 2);
   

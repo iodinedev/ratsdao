@@ -29,6 +29,10 @@ body.preload .mobile {
 
   &__content {
     z-index: 1000;
+
+    h1, h3 {
+      color: white;
+    }
   }
 
   .hero-cover + &__content {
@@ -45,17 +49,17 @@ a.back {
   padding: 0.2em 1em;
   display: flex;
   justify-content: center;
-  color: white;
+  color: var(--text-color);
+  gap: math.div($base-sizing, 10);
 
   svg {
-    fill: white;
+    fill: var(--text-color);
     width: .8em;
     margin-right: math.div($base-sizing, 10);
   }
 }
 
 .section {
-  color: white;
   background: $pink;//#121212;
   flex-direction: column;
   align-items: center;
@@ -112,7 +116,7 @@ a.back {
 
   a {
     &:hover {
-      color: white;
+      color: var(--hover-color);
     }
   }
 }
@@ -153,7 +157,7 @@ a.back {
     transition: height $transition-time!important;
   
     a {
-      color: white;
+      color: var(--text-color);
       font-size: 1.5em;
       display: flex;
       width: $base-sizing;
@@ -208,7 +212,7 @@ a.back {
         letter-spacing: 0.15em;
         text-decoration: none;
         font-size: .8em;
-        color: white;
+        color: var(--text-color);
         padding: math.div($base-sizing, 5) 0;
         display: flex;
         align-items: center;
@@ -221,7 +225,7 @@ a.back {
           height: 2px;
           left: 50%;
           position: absolute;
-          background: white;
+          background: var(--text-color);
           transition: width 0.3s ease 0s, left 0.3s ease 0s;
           width: 0;
         }
@@ -585,12 +589,13 @@ $gap: 25px;
     background: rgba(255 255 255 / 16%);
     text-align: center;
     border-radius: $border-radius;
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     transition: math.div($transition-time, 2) ease-out;
 
     h3 {
       font-size: 120%;
+      padding: math.div($base-sizing, 5) math.div($base-sizing, 2);
     }
 
     &__project {
@@ -690,6 +695,7 @@ $gap: 25px;
   height: $base-sizing*6;
 
   h1 {
+    color: white;
     text-shadow: 4px 4px $blue;
   }
 
@@ -976,6 +982,7 @@ $gap: 25px;
       z-index: 10;
       gap: math.div($base-sizing, 3);
       fill: white;
+      transition: $transition-time*2;
 
       svg {
         width: math.div($base-sizing, 2)
@@ -1008,6 +1015,21 @@ $gap: 25px;
         flex: 1;
         justify-content: center;
         gap: math.div($base-sizing, 2);
+
+        li {
+          a {
+            &:before, &:after {
+              background: var(--text-color);
+            }
+
+            &:after {
+              bottom: math.div($base-sizing, 5);
+              width: 100%;
+              left: 0;
+              visibility: visible;
+            }
+          }
+        }
       }
 
       .social__mobile {
@@ -1028,9 +1050,15 @@ $gap: 25px;
       }
     }
 
-    input:checked ~ .mobile {
-      animation: open $transition-time*2 ease-in-out;
-      clip-path: circle(200% at 15vw 0);
+    input:checked {
+      & ~ .mobile {
+        animation: open $transition-time*2 ease-in-out;
+        clip-path: circle(200% at 15vw 0);
+      }
+
+      & ~ .toggle {
+        fill: black;
+      }
     }
   }
 
@@ -1110,6 +1138,39 @@ $gap: 25px;
       }
     }
   }
+}
+
+.visually-hidden {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.gallery-header {
+  margin-top: math.div($base-sizing, 2);
+}
+
+.primary_content {
+  display: flex; flex-direction: column; justify-content: space-between; min-height: 100vh
+}
+
+.banner {
+  display: none
+}
+
+.text-center {
+  text-align:center
+}
+
+.text-italic {
+  font-style: italic
+}
+
+.text-break {
+  word-break:break-all
 }
 
 @keyframes open {

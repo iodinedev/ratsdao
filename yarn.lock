@@ -397,6 +397,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.21.tgz#864b987c0c68d07b4345845c3e63b75edd143644"
   integrity sha512-DBZCJbhII3r90XbQxI8Y9IjjiiOGlZ0Hr32omXIZvwwZ7p4DMMXGrKXVyPfuoBOri9XNtL0UK69jYIBIsRX3QQ==
 
+"@types/node@^14.14.31":
+  version "14.18.18"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.18.tgz#5c9503030df484ccffcbb935ea9a9e1d6fad1a20"
+  integrity sha512-B9EoJFjhqcQ9OmQrNorItO+OwEOORNn3S31WuiHvZY/dm9ajkB7AKD/8toessEtHHNL+58jofbq7hMMY9v4yig==
+
 "@types/node@^16.4.13":
   version "16.11.26"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.26.tgz#63d204d136c9916fb4dcd1b50f9740fe86884e47"
@@ -1561,6 +1566,13 @@ koa-convert@^2.0.0:
   dependencies:
     co "^4.6.0"
     koa-compose "^4.1.0"
+
+koa-csp@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/koa-csp/-/koa-csp-1.1.1.tgz#e04a1fa2b3904bb907402856183dc21c8bd21e4c"
+  integrity sha512-g7KOEzihND8UbqZ0j6eYaIOVhHOgUH2raixRNLzv1/Wznz496193BGle3F28EI/M1bHDWqCmOeHviYgUTGFzrQ==
+  dependencies:
+    "@types/node" "^14.14.31"
 
 koa-is-json@^1.0.0:
   version "1.0.0"
