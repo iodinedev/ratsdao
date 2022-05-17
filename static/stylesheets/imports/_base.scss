@@ -9,6 +9,7 @@ html, body {
   min-height: 100%;
   width: 100%;
   max-width: 100%;
+  height: fit-content;
   overflow-x: hidden;
   transition: $transition-time;
   scroll-behavior: smooth;

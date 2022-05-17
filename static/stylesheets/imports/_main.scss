@@ -13,6 +13,7 @@ body.preload .mobile {
 .section, .hero {
   display: flex;
   padding: $base-sizing 15vw;
+  min-height: 100%;
 }
 
 .round {
@@ -64,7 +65,10 @@ a.back {
   flex-direction: column;
   align-items: center;
   gap: $base-sizing;
-  min-height: 100vh;
+
+  &__gallery {
+    align-items: baseline;
+  }
 
   /*&__header {
     max-width: $base-sizing*20;
@@ -106,12 +110,15 @@ a.back {
   }
 
   &__text {
-    //box-shadow: 5px 5px 10px rgb(0 0 0 / 16%);
-    //padding: $base-sizing;
-    //border-radius: $border-radius;
     max-width: 1000px;
     width: 100%;
     min-width: min(100%, 500px);
+    padding: $base-sizing;
+    border-radius: $border-radius;
+    background: rgba(255, 255, 255, 0.2);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
   }
 
   a {
@@ -121,15 +128,44 @@ a.back {
   }
 }
 
+.scrolled {
+  .header {
+    height: 7vh;
+    box-shadow: 0 0 15px rgb(0 0 0 / 20%);
+
+    .toggle {
+      height: 7vh;
+    }
+
+    .social__media {
+      height: 7vh;
+      top: -2px;
+
+      a {
+        width: 0.75*$base-sizing;
+        height: 0.75*$base-sizing;
+
+        svg {
+          width: 0.375*$base-sizing;
+        }
+      }
+    }
+  }
+}
+
 .header {
   display: flex;
   width: 100%;
   height: 10vh;
   top: 0;
-  position: absolute;
+  position: fixed;
   z-index: 2000;
-  padding: 0 10vw;
+  padding: 0 15vw;
   height: 10vh;
+  transition: height $transition-time;
+  background: rgba(255, 255, 255, .4);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(7px);
 
   .desktop {
     width: 100%;
@@ -151,7 +187,7 @@ a.back {
     position: absolute;
     height: 10vh;
     top: 0;
-    right: 10vw;
+    right: 15vw;
     z-index: 10;
     gap: math.div($base-sizing, 3);
     transition: height $transition-time!important;
@@ -243,19 +279,26 @@ a.back {
   }
 }
 
-.index {
-  .header {
-    .toggle {
-      fill: white
-    }
+body:not(.scrolled) {
+  .index {
+    .header {
+      background: none;
+      backdrop-filter: none;
+      border: none;
+      box-shadow: none;
 
-    ul {
-      li {
-        a {
-          color: white;
+      .toggle {
+        fill: white
+      }
 
-          &:after {
-            background: white;
+      ul {
+        li {
+          a {
+            color: white;
+
+            &:after {
+              background: white;
+            }
           }
         }
       }
@@ -606,7 +649,7 @@ $gap: 25px;
     overflow: hidden;
     padding-bottom: math.div($base-sizing, 4);
     width: $base-sizing*4.5;
-    background: rgba(255 255 255 / 16%);
+    background: rgba(255 255 255 / 20%);
     text-align: center;
     border-radius: $border-radius;
     color: var(--text-color);
@@ -694,9 +737,10 @@ $gap: 25px;
     }
 
     &__partner {
-      width: $base-sizing*4;
+      min-width: $base-sizing*3;
       justify-content: space-between;
       padding: math.div($base-sizing, 2);
+      flex: 1;
 
       img {
         object-fit: contain;
@@ -938,38 +982,27 @@ $gap: 25px;
 }
 
 .welcome {
-  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 40vw;
-  right: 0;
-  background-color: white;
-  color: black;
-  height: $base-sizing*10;
-  padding-left: $base-sizing*2.5;
-  padding-right: $base-sizing;
-  border-top-left-radius: $border-radius;
-  border-bottom-left-radius: $border-radius;
+  align-items: center;
+  text-align: center;
+  color: #000;
 
   .icon {
-    position: absolute;
     width: min($base-sizing*4, 10vw);
     height: min($base-sizing*4, 10vw);
-    left: max($base-sizing*-2, -5vw);
-    top: 50%;
-    transform: translateY(-50%);
   }
 
   &__spacer {
-    height: $base-sizing*10;
-    display: flex;
-    align-items: center;
+    background: none;
+    padding: 0;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
   }
 
   &__video {
-    position: absolute;
-    left: 10vw;
 
     video {
       width: 40vw;
@@ -1131,18 +1164,13 @@ $gap: 25px;
     flex-direction: column;
     right: 0;
     height: unset;
-    width: 100vw;
     text-align: center;
-    padding: $base-sizing*2 $base-sizing;
-    margin-top: $base-sizing*2;
-    border-radius: 0;
 
     .icon {
       left: 50%;
       top: 0;
       width: $base-sizing*3.5;
       height: $base-sizing*3.5;
-      transform: translate(-50%, -50%);
     }
 
     &__spacer {
@@ -1156,7 +1184,7 @@ $gap: 25px;
       margin-top: $base-sizing;
 
       video {
-        width: 80vw;
+        width: 100%;
       }
     }
   }
@@ -1176,7 +1204,7 @@ $gap: 25px;
 }
 
 .primary_content {
-  display: flex; flex-direction: column; justify-content: space-between; min-height: 100vh
+  display: flex; flex-direction: column; justify-content: space-between; min-height: 100vh;
 }
 
 .banner {
@@ -1195,6 +1223,21 @@ $gap: 25px;
   word-break:break-all
 }
 
+.content {
+  height: 100%;
+}
+
+.whitepaper {
+  padding: $base-sizing;
+  border-radius: $border-radius;
+  background-color: white;
+}
+
+.scrollCheck {
+  position: absolute;
+  height: 10px;
+}
+
 @keyframes open {
   0% {
     clip-path: circle(0 at calc(10vw + #{math.div($base-sizing, 2)}) 5vh);
@@ -1210,5 +1253,13 @@ $gap: 25px;
   }
   100% {
     clip-path: circle(0 at calc(10vw + #{math.div($base-sizing, 2)}) 5vh);
+  }
+}
+
+@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .section {
+    &__text {
+
+    }
   }
 }

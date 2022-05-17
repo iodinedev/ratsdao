@@ -19,20 +19,20 @@ block content
         ) Join
 
   .section
-    .section__text.welcome__spacer
-      .welcome__video
-        video(
-          controls
-          frameborder="0",
-          allow="autoplay; encrypted-media",
-          allowfullscreen
-        )
-          source(src="/img/Rats_logo_intro_11.mp4")
+    .section__text
       .welcome
         img.icon(src="/img/ratsdao.png")
-        h2 Welcome to RatsDAO
+        h2.vr Welcome to RatsDAO
         p We made a video to help you get a quick introduction to our community; it covers who we are and what we hope to achieve.
-        p.vr Give it a watch — we promise it's short.
+        p Give it a watch — we promise it's short.
+        .welcome__video.vr
+          video(
+            controls
+            frameborder="0",
+            allow="autoplay; encrypted-media",
+            allowfullscreen
+          )
+            source(src="/img/Rats_logo_intro_11.mp4")
 
     .section__text
       h2 Our Partners

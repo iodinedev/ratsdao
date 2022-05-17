@@ -1,16 +1,20 @@
 extends ../layout
 
 block content
-  .section
-    h1
-      | Error 
-      = status
+  include ../includes/header.pug
 
-    p
-      | Uh-oh! You ran into an error. Need to go back 
-      a(href="/") home
-      | ?
-    if error
-      p.tip
-        | Error: 
-        = error
+  .section
+    .spacer
+    .section__text
+      h1
+        | Error 
+        = status
+
+      p
+        | Uh-oh! You ran into an error. Need to go back 
+        a(href="/") home
+        | ?
+      if error
+        p.tip
+          | Error: 
+          = error

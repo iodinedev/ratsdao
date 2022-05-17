@@ -89,8 +89,6 @@ async function generateHtml(gallery): Promise<string> {
 
     rows--;
   }
-
-  console.log("Generated HTML")
   
   return final.join("");
 }
