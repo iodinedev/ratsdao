@@ -4,7 +4,6 @@ import { database } from "../utils/database";
 import { updateGallery } from "../state";
 
 export const updateDatabase = async () => {
-  await database.drop();
 
   var finalNfts: Nft[] = [];
   var nfts: {
