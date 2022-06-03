@@ -135,7 +135,15 @@ export const database = {
     const projectNames: { name: string; policyId: string, value: number }[] = [];
 
     for await (const [key, value] of Object.entries(policies)) {
-      const floorPrice = ((await axios.get(`https://api.opencnft.io/1/policy/${key}/floor_price`)).data.floor_price * policies[key].length) / 1000000
+      var floorPrice = 0;
+
+      try {
+        console.log("Pinging OpenCNFT")
+        floorPrice = ((await axios.get(`https://api.opencnft.io/1/policy/${key}/floor_price`)).data.floor_price * policies[key].length) / 1000000
+      } catch(err) {
+        console.log(err)
+      }
+      
 
       projectNames.push({ name: await sharedStart(value), policyId: key, value: floorPrice });
     }

@@ -4,33 +4,21 @@ import { database } from "../utils/database";
 import { updateGallery } from "../state";
 
 export const updateDatabase = async () => {
-
   var finalNfts: Nft[] = [];
   var nfts: {
     unit: string;
     quantity: string;
   }[] = [];
-  var returned = 100;
-  var page = 1;
+  const total = nfts.length;
+
   var projects: {} = {};
   var assets: any[] = [];
 
   var downloaded = 0;
-  var total = 0;
 
-  while (returned == 100) {
-    const rawNfts = await blockfrost.getAllAssets(page);
-    if (rawNfts && rawNfts.status_code && rawNfts.status_code === 402)
-      return console.log("Usage limit reached.");
-
-    nfts = nfts.concat(rawNfts);
-
-    
-    returned = rawNfts.length;
-    page++;
+  for (const pool of process.env.POOLS!.split(",")) {
+    nfts = nfts.concat((await blockfrost.getInfo(pool)).amount)
   }
-
-  total = nfts.length;
 
   for await (const rawNft of nfts) {
     const nft = await blockfrost.getAsset(rawNft.unit);
