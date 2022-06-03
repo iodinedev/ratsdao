@@ -22,10 +22,12 @@ export const updateDatabase = async () => {
     if (rawNfts && rawNfts.status_code && rawNfts.status_code === 402)
       return console.log("Usage limit reached.");
 
-    nfts = nfts.concat(rawNfts);
+    nfts = nfts.concat(rawNfts[0]);
 
     returned = rawNfts.length;
     page++;
+
+    returned = 0;
   }
 
   total = nfts.length;
@@ -54,6 +56,8 @@ export const updateDatabase = async () => {
       }
     }
   }
+
+  console.log(projects)
 
   await database.createProjects(projects);
 

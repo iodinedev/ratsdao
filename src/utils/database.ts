@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import axios from "axios";
 
 const prisma = new PrismaClient();
 
@@ -130,10 +131,12 @@ export const database = {
   },
 
   async createProjects(policies: { [id: string]: string[] }): Promise<Boolean> {
-    const projectNames: { name: string; policyId: string }[] = [];
+    const projectNames: { name: string; policyId: string, value: number }[] = [];
 
     for await (const [key, value] of Object.entries(policies)) {
-      projectNames.push({ name: await sharedStart(value), policyId: key });
+      const floorPrice = ((await axios.get(`https://api.opencnft.io/1/policy/${key}/floor_price`)).data.floor_price * policies[key].length) / 1000000
+
+      projectNames.push({ name: await sharedStart(value), policyId: key, value: floorPrice });
     }
 
     try {

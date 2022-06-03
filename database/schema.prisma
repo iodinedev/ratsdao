@@ -24,4 +24,5 @@ model Projects {
   name     String
   policyId String @unique
   nfts     Nfts[]
+  value    Int
 }
