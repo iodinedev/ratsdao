@@ -138,7 +138,6 @@ export const database = {
       var floorPrice = 0;
 
       try {
-        console.log("Pinging OpenCNFT")
         floorPrice = ((await axios.get(`https://api.opencnft.io/1/policy/${key}/floor_price`)).data.floor_price * policies[key].length) / 1000000
       } catch(err) {
         console.log(err)
