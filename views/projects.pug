@@ -4,7 +4,9 @@ block content
   include includes/header.pug
   .section
     .spacer
-    h1.section__header Collections
+    .section__header
+      h1 Collections
+      h3 Worth #{total_value} ADA
     if projects.length > 0
       .cards
         - printed = false;

@@ -70,6 +70,10 @@ a.back {
     align-items: baseline;
   }
 
+  &__header {
+    text-align: center;
+  }
+
   /*&__header {
     max-width: $base-sizing*20;
     width: 100%;
@@ -661,6 +665,11 @@ $gap: 25px;
       padding: math.div($base-sizing, 5) math.div($base-sizing, 2);
     }
 
+    h6 {
+      margin: 0;
+      font-size: 100%;
+    }
+
     &__project {
       width: $base-sizing*6;
       padding: math.div($base-sizing, 2);
@@ -908,6 +917,8 @@ $gap: 25px;
   gap: math.div($base-sizing, 5);
   height: $base-sizing;
   line-height: $base-sizing;
+  width: 100%;
+  justify-content: center;
 
   &__circle {
     width: $base-sizing;

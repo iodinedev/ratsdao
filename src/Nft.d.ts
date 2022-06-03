@@ -11,5 +11,6 @@ interface Nft {
 interface Project {
   id: number,
   name: string,
-  nfts: Nft[]
+  nfts: Nft[],
+  value: number
 }

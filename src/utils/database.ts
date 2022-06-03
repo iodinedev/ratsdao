@@ -105,6 +105,7 @@ export const database = {
           id: true,
           name: true,
           nfts: true,
+          value: true
         },
       });
 

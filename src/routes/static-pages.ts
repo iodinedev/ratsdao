@@ -121,10 +121,18 @@ export function init() {
 
   router.get("/projects", async (ctx) => {
     const projects = await database.getProjects();
+    var total_val = 0;
+
+    if (projects) {
+      for await (const project of projects) {
+        total_val += project.value;
+      }
+    }
 
     ctx.render("projects.pug", {
       title: "Projects | RatsDAO",
       projects: projects,
+      total_value: total_val
     });
   });
 

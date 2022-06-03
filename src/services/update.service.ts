@@ -4,6 +4,8 @@ import { database } from "../utils/database";
 import { updateGallery } from "../state";
 
 export const updateDatabase = async () => {
+  await database.drop();
+
   var finalNfts: Nft[] = [];
   var nfts: {
     unit: string;
@@ -22,12 +24,11 @@ export const updateDatabase = async () => {
     if (rawNfts && rawNfts.status_code && rawNfts.status_code === 402)
       return console.log("Usage limit reached.");
 
-    nfts = nfts.concat(rawNfts[0]);
+    nfts = nfts.concat(rawNfts);
 
+    
     returned = rawNfts.length;
     page++;
-
-    returned = 0;
   }
 
   total = nfts.length;
@@ -56,8 +57,6 @@ export const updateDatabase = async () => {
       }
     }
   }
-
-  console.log(projects)
 
   await database.createProjects(projects);
 
