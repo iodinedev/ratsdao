@@ -11,6 +11,7 @@ RUN npm install --global sass
 
 # Install package dependencies
 RUN yarn install --production=true
+RUN yarn prisma migrate
 
 # Set environment variables
 ENV HTTP_PORT=3000
